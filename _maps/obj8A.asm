@@ -204,22 +204,32 @@ byte_17680:	dc.b 8			 ; TRY AGAIN
 		dc.b $30, 5, 0,	4, $18
 		dc.b $30, 1, 0,	$46, $28
 		dc.b $30, 5, 0,	$1A, $30
-byte_176A9:	dc.b $11		 ; SONIC TEAM PRESENTS
-		dc.b $E8, 5, 0,	$2E, $B4
-		dc.b $E8, 5, 0,	$26, $C4
-		dc.b $E8, 5, 0,	$1A, $D4
-		dc.b $E8, 1, 0,	$46, $E4
-		dc.b $E8, 5, 0,	$1E, $EC
-		dc.b $E8, 5, 0,	$3E, 4
-		dc.b $E8, 5, 0,	$E, $14
-		dc.b $E8, 5, 0,	4, $24
-		dc.b $E8, 9, 0,	8, $34
-		dc.b 0,	5, 0, $12, $C0
-		dc.b 0,	5, 0, $22, $D0
-		dc.b 0,	5, 0, $E, $E0
-		dc.b 0,	5, 0, $2E, $F0
-		dc.b 0,	5, 0, $E, 0
-		dc.b 0,	5, 0, $1A, $10
-		dc.b 0,	5, 0, $3E, $20
-		dc.b 0,	5, 0, $2E, $30
+byte_176A9:	dc.b $1B	;  SONIC TEAM PRESENTS | YOU GOT THE SAME MUSIC CADE
+		dc.b $E8, 5, 0, $2A, $28	; Y
+		dc.b $E8, 5, 0, $26, $38	; O
+		dc.b $E8, 5, 0, $32, $48	; U
+		dc.b $E8, 0, 0, $60, $C   	 ; Space
+		dc.b $E8, 5, 0, 0, $68		; G
+		dc.b $E8, 5, 0, $26, $78	; O
+		dc.b $E8, 5, 0, $3E, $88	; T
+		dc.b $E8, 0, 0, $60, $C   	 ; Space
+		dc.b $E8, 5, 0, $3E, $A8	; T
+		dc.b $E8, 5, 0, $3A, $B8	; H
+		dc.b $E8, 5, 0, $0E, $C8	; E
+		dc.b $E8, 0, 0, $60, $C   	 ; Space
+		dc.b $E8, 5, 0, $2E, $E8	; S
+		dc.b $E8, 5, 0, 4, $F8		; A
+		dc.b $E8, 9, 0, 8, $8		; M
+		dc.b $E8, 5, 0, $0E, $1C	; E
+		dc.b $E8, 0, 0, $60, $C   	 ; Space
+		dc.b $E8, 9, 0, 8, $3C		; M
+		dc.b $E8, 5, 0, $32, $50	; U
+		dc.b $E8, 5, 0, $2E, $60	; S
+		dc.b $E8, 1, 0, $46, $70	; I
+		dc.b $E8, 5, 0, $1E, $78	; C
+		dc.b $E8, 0, 0, $60, $C   	 ; Space
+		dc.b $E8, 5, 0, $1E, $98	; C
+		dc.b $E8, 5, 0, 4, $A8		; A
+		dc.b $E8, 5, 0, $42, $B8	; D
+		dc.b $E8, 5, 0, $0E, $C8	; E
 		even

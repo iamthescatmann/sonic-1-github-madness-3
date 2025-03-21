@@ -33,9 +33,9 @@ Vectors:	dc.l $FFFE00, EntryPoint, BusError, AddressError
 		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
 		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
 Console:	dc.b 'SEGA MEGA DRIVE ' ; Hardware system ID
-Date:		dc.b '(C)SEGA 1991.APR' ; Release date
-Title_Local:	dc.b 'SONIC THE               HEDGEHOG                ' ; Domestic name
-Title_Int:	dc.b 'SONIC THE               HEDGEHOG                ' ; International name
+Date:		dc.b '(C)CADE CADE C  ' ; Release date
+Title_Local:	dc.b 'how to disassemble vhs tapes on a slab of wood  ' ; Domestic name
+Title_Int:	dc.b 'how to disassemble vhs tapes on a slab of wood  ' ; International name
 Serial:		dc.b 'GM 00001009-00'   ; Serial/version number
 Checksum:	dc.w 0
 		dc.b 'J               ' ; I/O support
@@ -15670,68 +15670,96 @@ Map_obj34:	dc.w byte_C9FE-Map_obj34
 		dc.w byte_CB3C-Map_obj34
 		dc.w byte_CB47-Map_obj34
 		dc.w byte_CB8A-Map_obj34
-byte_C9FE:	dc.b 9 			; GREEN HILL
-		dc.b $F8, 5, 0,	$18, $B4
-		dc.b $F8, 5, 0,	$3A, $C4
-		dc.b $F8, 5, 0,	$10, $D4
-		dc.b $F8, 5, 0,	$10, $E4
-		dc.b $F8, 5, 0,	$2E, $F4
-		dc.b $F8, 5, 0,	$1C, $14
-		dc.b $F8, 1, 0,	$20, $24
-		dc.b $F8, 5, 0,	$26, $2C
-		dc.b $F8, 5, 0,	$26, $3C
-byte_CA2C:	dc.b 9			; LABYRINTH
-		dc.b $F8, 5, 0,	$26, $BC
-		dc.b $F8, 5, 0,	0, $CC
-		dc.b $F8, 5, 0,	4, $DC
-		dc.b $F8, 5, 0,	$4A, $EC
-		dc.b $F8, 5, 0,	$3A, $FC
-		dc.b $F8, 1, 0,	$20, $C
-		dc.b $F8, 5, 0,	$2E, $14
-		dc.b $F8, 5, 0,	$42, $24
-		dc.b $F8, 5, 0,	$1C, $34
-byte_CA5A:	dc.b 6			; MARBLE
-		dc.b $F8, 5, 0,	$2A, $CF
-		dc.b $F8, 5, 0,	0, $E0
-		dc.b $F8, 5, 0,	$3A, $F0
-		dc.b $F8, 5, 0,	4, 0
-		dc.b $F8, 5, 0,	$26, $10
-		dc.b $F8, 5, 0,	$10, $20
-		dc.b 0
-byte_CA7A:	dc.b 9			; STAR	LIGHT
-		dc.b $F8, 5, 0,	$3E, $B4
-		dc.b $F8, 5, 0,	$42, $C4
-		dc.b $F8, 5, 0,	0, $D4
-		dc.b $F8, 5, 0,	$3A, $E4
-		dc.b $F8, 5, 0,	$26, 4
-		dc.b $F8, 1, 0,	$20, $14
-		dc.b $F8, 5, 0,	$18, $1C
-		dc.b $F8, 5, 0,	$1C, $2C
-		dc.b $F8, 5, 0,	$42, $3C
-byte_CAA8:	dc.b $A			; SPRING YARD
-		dc.b $F8, 5, 0,	$3E, $AC
-		dc.b $F8, 5, 0,	$36, $BC
-		dc.b $F8, 5, 0,	$3A, $CC
-		dc.b $F8, 1, 0,	$20, $DC
-		dc.b $F8, 5, 0,	$2E, $E4
-		dc.b $F8, 5, 0,	$18, $F4
-		dc.b $F8, 5, 0,	$4A, $14
-		dc.b $F8, 5, 0,	0, $24
-		dc.b $F8, 5, 0,	$3A, $34
-		dc.b $F8, 5, 0,	$C, $44
-		dc.b 0
-byte_CADC:	dc.b $A			; SCRAP BRAIN
-		dc.b $F8, 5, 0,	$3E, $AC
-		dc.b $F8, 5, 0,	8, $BC
-		dc.b $F8, 5, 0,	$3A, $CC
-		dc.b $F8, 5, 0,	0, $DC
-		dc.b $F8, 5, 0,	$36, $EC
-		dc.b $F8, 5, 0,	4, $C
-		dc.b $F8, 5, 0,	$3A, $1C
-		dc.b $F8, 5, 0,	0, $2C
-		dc.b $F8, 1, 0,	$20, $3C
-		dc.b $F8, 5, 0,	$2E, $44
-		dc.b 0
+byte_C9FE:	dc.b $C	;  GREEN HILL | CRUNCHY ROLL
+		dc.b $F8, 5, 0, 8, $80		; C
+		dc.b $F8, 5, 0, $3A, $90	; R
+		dc.b $F8, 5, 0, $46, $A0	; U
+		dc.b $F8, 5, 0, $2E, $B0	; N
+		dc.b $F8, 5, 0, 8, $C0		; C
+		dc.b $F8, 5, 0, $1C, $D0	; H
+		dc.b $F8, 5, 0, $4A, $E0	; Y
+		dc.b $F8, 0, 0, $56, $F0	; Space
+		dc.b $F8, 5, 0, $3A, $0	; R
+		dc.b $F8, 5, 0, $32, $10	; O
+		dc.b $F8, 5, 0, $26, $20	; L
+		dc.b $F8, 5, 0, $26, $30	; L
+byte_CA2C:	dc.b $16	;  LABYRINTH | I LIKE FILE EGGSPLORER
+		dc.b $F8, 1, 0, $20, $80	; I
+		dc.b $F8, 0, 0, $56, $88	; Space
+		dc.b $F8, 5, 0, $26, $98	; L
+		dc.b $F8, 1, 0, $20, $A8	; I
+		dc.b $F8, 5, 0, $22, $B0	; K
+		dc.b $F8, 5, 0, $10, $C0	; E
+		dc.b $F8, 0, 0, $56, $D0	; Space
+		dc.b $F8, 5, 0, $14, $E0	; F
+		dc.b $F8, 1, 0, $20, $F0	; I
+		dc.b $F8, 5, 0, $26, $F8	; L
+		dc.b $F8, 5, 0, $10, $8	; E
+		dc.b $F8, 0, 0, $56, $18	; Space
+		dc.b $F8, 5, 0, $10, $28	; E
+		dc.b $F8, 5, 0, $18, $38	; G
+		dc.b $F8, 5, 0, $18, $48	; G
+		dc.b $F8, 5, 0, $3E, $58	; S
+		dc.b $F8, 5, 0, $36, $68	; P
+		dc.b $F8, 5, 0, $26, $78	; L
+		dc.b $F8, 5, 0, $32, $88	; O
+		dc.b $F8, 5, 0, $3A, $98	; R
+		dc.b $F8, 5, 0, $10, $A8	; E
+		dc.b $F8, 5, 0, $3A, $B8	; R
+byte_CA5A:	dc.b 5	;  MARBLE | MARBL
+		dc.b $F8, 5, 0, $2A, $80	; M
+		dc.b $F8, 5, 0, 0, $90		; A
+		dc.b $F8, 5, 0, $3A, $A0	; R
+		dc.b $F8, 5, 0, 4, $B0		; B
+		dc.b $F8, 5, 0, $26, $C0	; L
+byte_CA7A:	dc.b $11	;  STAR LIGHT | DONT GET RIDOTHIS
+		dc.b $F8, 5, 0, $0C, $80	; D
+		dc.b $F8, 5, 0, $32, $90	; O
+		dc.b $F8, 5, 0, $2E, $A0	; N
+		dc.b $F8, 5, 0, $42, $B0	; T
+		dc.b $F8, 0, 0, $56, $C0	; Space
+		dc.b $F8, 5, 0, $18, $D0	; G
+		dc.b $F8, 5, 0, $10, $E0	; E
+		dc.b $F8, 5, 0, $42, $F0	; T
+		dc.b $F8, 0, 0, $56, $0	; Space
+		dc.b $F8, 5, 0, $3A, $10	; R
+		dc.b $F8, 1, 0, $20, $20	; I
+		dc.b $F8, 5, 0, $0C, $28	; D
+		dc.b $F8, 5, 0, $32, $38	; O
+		dc.b $F8, 5, 0, $42, $48	; T
+		dc.b $F8, 5, 0, $1C, $58	; H
+		dc.b $F8, 1, 0, $20, $68	; I
+		dc.b $F8, 5, 0, $3E, $70	; S
+byte_CAA8:	dc.b $15	;  SPRING YARD | THE PIG FROM BARNYARD
+		dc.b $F8, 5, 0, $42, $80	; T
+		dc.b $F8, 5, 0, $1C, $90	; H
+		dc.b $F8, 5, 0, $10, $A0	; E
+		dc.b $F8, 0, 0, $56, $B0	; Space
+		dc.b $F8, 5, 0, $36, $C0	; P
+		dc.b $F8, 1, 0, $20, $D0	; I
+		dc.b $F8, 5, 0, $18, $D8	; G
+		dc.b $F8, 0, 0, $56, $E8	; Space
+		dc.b $F8, 5, 0, $14, $F8	; F
+		dc.b $F8, 5, 0, $3A, $8	; R
+		dc.b $F8, 5, 0, $32, $18	; O
+		dc.b $F8, 5, 0, $2A, $28	; M
+		dc.b $F8, 0, 0, $56, $38	; Space
+		dc.b $F8, 5, 0, 4, $48		; B
+		dc.b $F8, 5, 0, 0, $58		; A
+		dc.b $F8, 5, 0, $3A, $68	; R
+		dc.b $F8, 5, 0, $2E, $78	; N
+		dc.b $F8, 5, 0, $4A, $88	; Y
+		dc.b $F8, 5, 0, 0, $98		; A
+		dc.b $F8, 5, 0, $3A, $A8	; R
+		dc.b $F8, 5, 0, $0C, $B8	; D
+byte_CADC:	dc.b 7	;  SCRAP BRAIN | Z Z Z Z
+		dc.b $F8, 5, 0, $4E, $80	; Z
+		dc.b $F8, 0, 0, $56, $90	; Space
+		dc.b $F8, 5, 0, $4E, $A0	; Z
+		dc.b $F8, 0, 0, $56, $B0	; Space
+		dc.b $F8, 5, 0, $4E, $C0	; Z
+		dc.b $F8, 0, 0, $56, $D0	; Space
+		dc.b $F8, 5, 0, $4E, $E0	; Z
 byte_CB10:	dc.b 4			; ZONE
 		dc.b $F8, 5, 0,	$4E, $E0
 		dc.b $F8, 5, 0,	$32, $F0
@@ -15787,15 +15815,22 @@ Map_obj3A:	dc.w byte_CBEA-Map_obj3A
 		dc.w byte_CB26-Map_obj3A
 		dc.w byte_CB31-Map_obj3A
 		dc.w byte_CB3C-Map_obj3A
-byte_CBEA:	dc.b 8			; SONIC HAS
-		dc.b $F8, 5, 0,	$3E, $B8
-		dc.b $F8, 5, 0,	$32, $C8
-		dc.b $F8, 5, 0,	$2E, $D8
-		dc.b $F8, 1, 0,	$20, $E8
-		dc.b $F8, 5, 0,	8, $F0
-		dc.b $F8, 5, 0,	$1C, $10
-		dc.b $F8, 5, 0,	0, $20
-		dc.b $F8, 5, 0,	$3E, $30
+byte_CBEA:	dc.b $F	;  SONIC HAS | CADNIUM SULFIDE
+		dc.b $F8, 5, 0, 8, $7C		; C
+		dc.b $F8, 5, 0, 0, $8C		; A
+		dc.b $F8, 5, 0, $0C, $9C	; D
+		dc.b $F8, 5, 0, $2E, $AC	; N
+		dc.b $F8, 1, 0, $20, $BC	; I
+		dc.b $F8, 5, 0, $46, $C4	; U
+		dc.b $F8, 5, 0, $2A, $D4	; M
+		dc.b $F8, 0, 0, $56, $E4	; Space
+		dc.b $F8, 5, 0, $3E, $F4	; S
+		dc.b $F8, 5, 0, $46, $4	; U
+		dc.b $F8, 5, 0, $26, $14	; L
+		dc.b $F8, 5, 0, $14, $24	; F
+		dc.b $F8, 1, 0, $20, $34	; I
+		dc.b $F8, 5, 0, $0C, $3C	; D
+		dc.b $F8, 5, 0, $10, $4C	; E
 byte_CC13:	dc.b 6			; PASSED
 		dc.b $F8, 5, 0,	$36, $D0
 		dc.b $F8, 5, 0,	0, $E0
