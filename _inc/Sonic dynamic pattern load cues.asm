@@ -1,0 +1,435 @@
+DPLC_3959:
+DPLC_3959_0: 	dc.w DPLC_3959_B0-DPLC_3959
+DPLC_3959_2: 	dc.w DPLC_3959_B1-DPLC_3959
+DPLC_3959_4: 	dc.w DPLC_3959_B6-DPLC_3959
+DPLC_3959_6: 	dc.w DPLC_3959_BD-DPLC_3959
+DPLC_3959_8: 	dc.w DPLC_3959_C4-DPLC_3959
+DPLC_3959_A: 	dc.w DPLC_3959_CB-DPLC_3959
+DPLC_3959_C: 	dc.w DPLC_3959_D2-DPLC_3959
+DPLC_3959_E: 	dc.w DPLC_3959_DB-DPLC_3959
+DPLC_3959_10: 	dc.w DPLC_3959_E0-DPLC_3959
+DPLC_3959_12: 	dc.w DPLC_3959_E5-DPLC_3959
+DPLC_3959_14: 	dc.w DPLC_3959_EE-DPLC_3959
+DPLC_3959_16: 	dc.w DPLC_3959_F3-DPLC_3959
+DPLC_3959_18: 	dc.w DPLC_3959_FA-DPLC_3959
+DPLC_3959_1A: 	dc.w DPLC_3959_105-DPLC_3959
+DPLC_3959_1C: 	dc.w DPLC_3959_112-DPLC_3959
+DPLC_3959_1E: 	dc.w DPLC_3959_11B-DPLC_3959
+DPLC_3959_20: 	dc.w DPLC_3959_126-DPLC_3959
+DPLC_3959_22: 	dc.w DPLC_3959_12F-DPLC_3959
+DPLC_3959_24: 	dc.w DPLC_3959_13A-DPLC_3959
+DPLC_3959_26: 	dc.w DPLC_3959_143-DPLC_3959
+DPLC_3959_28: 	dc.w DPLC_3959_148-DPLC_3959
+DPLC_3959_2A: 	dc.w DPLC_3959_14D-DPLC_3959
+DPLC_3959_2C: 	dc.w DPLC_3959_156-DPLC_3959
+DPLC_3959_2E: 	dc.w DPLC_3959_15B-DPLC_3959
+DPLC_3959_30: 	dc.w DPLC_3959_162-DPLC_3959
+DPLC_3959_32: 	dc.w DPLC_3959_16F-DPLC_3959
+DPLC_3959_34: 	dc.w DPLC_3959_17C-DPLC_3959
+DPLC_3959_36: 	dc.w DPLC_3959_185-DPLC_3959
+DPLC_3959_38: 	dc.w DPLC_3959_190-DPLC_3959
+DPLC_3959_3A: 	dc.w DPLC_3959_199-DPLC_3959
+DPLC_3959_3C: 	dc.w DPLC_3959_1A4-DPLC_3959
+DPLC_3959_3E: 	dc.w DPLC_3959_1A9-DPLC_3959
+DPLC_3959_40: 	dc.w DPLC_3959_1AE-DPLC_3959
+DPLC_3959_42: 	dc.w DPLC_3959_1B3-DPLC_3959
+DPLC_3959_44: 	dc.w DPLC_3959_1B8-DPLC_3959
+DPLC_3959_46: 	dc.w DPLC_3959_1C1-DPLC_3959
+DPLC_3959_48: 	dc.w DPLC_3959_1C8-DPLC_3959
+DPLC_3959_4A: 	dc.w DPLC_3959_1D1-DPLC_3959
+DPLC_3959_4C: 	dc.w DPLC_3959_1D8-DPLC_3959
+DPLC_3959_4E: 	dc.w DPLC_3959_1DD-DPLC_3959
+DPLC_3959_50: 	dc.w DPLC_3959_1E2-DPLC_3959
+DPLC_3959_52: 	dc.w DPLC_3959_1E7-DPLC_3959
+DPLC_3959_54: 	dc.w DPLC_3959_1EC-DPLC_3959
+DPLC_3959_56: 	dc.w DPLC_3959_1F5-DPLC_3959
+DPLC_3959_58: 	dc.w DPLC_3959_1FA-DPLC_3959
+DPLC_3959_5A: 	dc.w DPLC_3959_203-DPLC_3959
+DPLC_3959_5C: 	dc.w DPLC_3959_208-DPLC_3959
+DPLC_3959_5E: 	dc.w DPLC_3959_20B-DPLC_3959
+DPLC_3959_60: 	dc.w DPLC_3959_20E-DPLC_3959
+DPLC_3959_62: 	dc.w DPLC_3959_211-DPLC_3959
+DPLC_3959_64: 	dc.w DPLC_3959_214-DPLC_3959
+DPLC_3959_66: 	dc.w DPLC_3959_217-DPLC_3959
+DPLC_3959_68: 	dc.w DPLC_3959_21C-DPLC_3959
+DPLC_3959_6A: 	dc.w DPLC_3959_21F-DPLC_3959
+DPLC_3959_6C: 	dc.w DPLC_3959_224-DPLC_3959
+DPLC_3959_6E: 	dc.w DPLC_3959_227-DPLC_3959
+DPLC_3959_70: 	dc.w DPLC_3959_22C-DPLC_3959
+DPLC_3959_72: 	dc.w DPLC_3959_235-DPLC_3959
+DPLC_3959_74: 	dc.w DPLC_3959_23E-DPLC_3959
+DPLC_3959_76: 	dc.w DPLC_3959_245-DPLC_3959
+DPLC_3959_78: 	dc.w DPLC_3959_24C-DPLC_3959
+DPLC_3959_7A: 	dc.w DPLC_3959_253-DPLC_3959
+DPLC_3959_7C: 	dc.w DPLC_3959_256-DPLC_3959
+DPLC_3959_7E: 	dc.w DPLC_3959_25D-DPLC_3959
+DPLC_3959_80: 	dc.w DPLC_3959_264-DPLC_3959
+DPLC_3959_82: 	dc.w DPLC_3959_26B-DPLC_3959
+DPLC_3959_84: 	dc.w DPLC_3959_274-DPLC_3959
+DPLC_3959_86: 	dc.w DPLC_3959_27D-DPLC_3959
+DPLC_3959_88: 	dc.w DPLC_3959_288-DPLC_3959
+DPLC_3959_8A: 	dc.w DPLC_3959_293-DPLC_3959
+DPLC_3959_8C: 	dc.w DPLC_3959_298-DPLC_3959
+DPLC_3959_8E: 	dc.w DPLC_3959_29F-DPLC_3959
+DPLC_3959_90: 	dc.w DPLC_3959_2A4-DPLC_3959
+DPLC_3959_92: 	dc.w DPLC_3959_2AB-DPLC_3959
+DPLC_3959_94: 	dc.w DPLC_3959_2B0-DPLC_3959
+DPLC_3959_96: 	dc.w DPLC_3959_2B7-DPLC_3959
+DPLC_3959_98: 	dc.w DPLC_3959_2BE-DPLC_3959
+DPLC_3959_9A: 	dc.w DPLC_3959_2C9-DPLC_3959
+DPLC_3959_9C: 	dc.w DPLC_3959_2D4-DPLC_3959
+DPLC_3959_9E: 	dc.w DPLC_3959_2D9-DPLC_3959
+DPLC_3959_A0: 	dc.w DPLC_3959_2E0-DPLC_3959
+DPLC_3959_A2: 	dc.w DPLC_3959_2E3-DPLC_3959
+DPLC_3959_A4: 	dc.w DPLC_3959_2E6-DPLC_3959
+DPLC_3959_A6: 	dc.w DPLC_3959_2E9-DPLC_3959
+DPLC_3959_A8: 	dc.w DPLC_3959_2F0-DPLC_3959
+DPLC_3959_AA: 	dc.w DPLC_3959_2F7-DPLC_3959
+DPLC_3959_AC: 	dc.w DPLC_3959_2FE-DPLC_3959
+DPLC_3959_AE: 	dc.w DPLC_3959_305-DPLC_3959
+DPLC_3959_B0: 	dc.b $0
+DPLC_3959_B1: 	dc.b $2
+	dc.b $F0, $0
+	dc.b $10, $10
+DPLC_3959_B6: 	dc.b $3
+	dc.b $50, $12
+	dc.b $50, $18
+	dc.b $20, $1E
+DPLC_3959_BD: 	dc.b $3
+	dc.b $50, $21
+	dc.b $50, $18
+	dc.b $20, $1E
+DPLC_3959_C4: 	dc.b $3
+	dc.b $50, $21
+	dc.b $50, $18
+	dc.b $20, $27
+DPLC_3959_CB: 	dc.b $3
+	dc.b $80, $2A
+	dc.b $20, $33
+	dc.b $20, $36
+DPLC_3959_D2: 	dc.b $4
+	dc.b $70, $39
+	dc.b $50, $41
+	dc.b $50, $47
+	dc.b $10, $4D
+DPLC_3959_DB: 	dc.b $2
+	dc.b $70, $39
+	dc.b $B0, $4F
+DPLC_3959_E0: 	dc.b $2
+	dc.b $50, $5B
+	dc.b $80, $61
+DPLC_3959_E5: 	dc.b $4
+	dc.b $50, $5B
+	dc.b $50, $6A
+	dc.b $50, $70
+	dc.b $10, $76
+DPLC_3959_EE: 	dc.b $2
+	dc.b $50, $5B
+	dc.b $B0, $78
+DPLC_3959_F3: 	dc.b $3
+	dc.b $70, $39
+	dc.b $30, $84
+	dc.b $50, $88
+DPLC_3959_FA: 	dc.b $5
+	dc.b $50, $8E
+	dc.b $50, $94
+	dc.b $20, $9A
+	dc.b $50, $9D
+	dc.b $0, $A3
+DPLC_3959_105: 	dc.b $6
+	dc.b $50, $8E
+	dc.b $10, $A4
+	dc.b $30, $A6
+	dc.b $50, $AA
+	dc.b $30, $B0
+	dc.b $0, $B4
+DPLC_3959_112: 	dc.b $4
+	dc.b $50, $B5
+	dc.b $10, $BB
+	dc.b $70, $BD
+	dc.b $20, $C5
+DPLC_3959_11B: 	dc.b $5
+	dc.b $50, $C8
+	dc.b $30, $CE
+	dc.b $70, $D2
+	dc.b $20, $DA
+	dc.b $10, $DD
+DPLC_3959_126: 	dc.b $4
+	dc.b $50, $C8
+	dc.b $10, $DF
+	dc.b $70, $E1
+	dc.b $20, $E9
+DPLC_3959_12F: 	dc.b $5
+	dc.b $50, $8E
+	dc.b $10, $A4
+	dc.b $0, $9A
+	dc.b $70, $EC
+	dc.b $20, $F4
+DPLC_3959_13A: 	dc.b $4
+	dc.b $70, $F7
+	dc.b $50, $FF
+	dc.b $11, $5
+	dc.b $51, $7
+DPLC_3959_143: 	dc.b $2
+	dc.b $70, $F7
+	dc.b $B1, $D
+DPLC_3959_148: 	dc.b $2
+	dc.b $51, $19
+	dc.b $81, $1F
+DPLC_3959_14D: 	dc.b $4
+	dc.b $51, $19
+	dc.b $51, $28
+	dc.b $11, $2E
+	dc.b $51, $30
+DPLC_3959_156: 	dc.b $2
+	dc.b $51, $19
+	dc.b $B1, $36
+DPLC_3959_15B: 	dc.b $3
+	dc.b $70, $F7
+	dc.b $1, $D
+	dc.b $81, $42
+DPLC_3959_162: 	dc.b $6
+	dc.b $51, $4B
+	dc.b $11, $51
+	dc.b $11, $53
+	dc.b $81, $55
+	dc.b $1, $5E
+	dc.b $1, $5F
+DPLC_3959_16F: 	dc.b $6
+	dc.b $51, $4B
+	dc.b $21, $60
+	dc.b $11, $63
+	dc.b $11, $65
+	dc.b $81, $67
+	dc.b $1, $5E
+DPLC_3959_17C: 	dc.b $4
+	dc.b $51, $70
+	dc.b $11, $76
+	dc.b $81, $78
+	dc.b $11, $81
+DPLC_3959_185: 	dc.b $5
+	dc.b $51, $83
+	dc.b $21, $89
+	dc.b $11, $8C
+	dc.b $71, $8E
+	dc.b $21, $96
+DPLC_3959_190: 	dc.b $4
+	dc.b $51, $83
+	dc.b $11, $99
+	dc.b $81, $9B
+	dc.b $11, $A4
+DPLC_3959_199: 	dc.b $5
+	dc.b $51, $4B
+	dc.b $81, $A6
+	dc.b $11, $65
+	dc.b $11, $AF
+	dc.b $1, $5E
+DPLC_3959_1A4: 	dc.b $2
+	dc.b $51, $B1
+	dc.b $B1, $B7
+DPLC_3959_1A9: 	dc.b $2
+	dc.b $50, $5B
+	dc.b $B1, $C3
+DPLC_3959_1AE: 	dc.b $2
+	dc.b $51, $B1
+	dc.b $B1, $CF
+DPLC_3959_1B3: 	dc.b $2
+	dc.b $50, $5B
+	dc.b $B1, $DB
+DPLC_3959_1B8: 	dc.b $4
+	dc.b $51, $E7
+	dc.b $11, $ED
+	dc.b $B1, $EF
+	dc.b $1, $FB
+DPLC_3959_1C1: 	dc.b $3
+	dc.b $51, $FC
+	dc.b $12, $2
+	dc.b $B2, $4
+DPLC_3959_1C8: 	dc.b $4
+	dc.b $51, $E7
+	dc.b $12, $10
+	dc.b $B2, $12
+	dc.b $1, $FB
+DPLC_3959_1D1: 	dc.b $3
+	dc.b $51, $FC
+	dc.b $12, $2
+	dc.b $B2, $1E
+DPLC_3959_1D8: 	dc.b $2
+	dc.b $52, $2A
+	dc.b $B2, $30
+DPLC_3959_1DD: 	dc.b $2
+	dc.b $51, $19
+	dc.b $B2, $3C
+DPLC_3959_1E2: 	dc.b $2
+	dc.b $52, $2A
+	dc.b $B2, $48
+DPLC_3959_1E7: 	dc.b $2
+	dc.b $51, $19
+	dc.b $B2, $54
+DPLC_3959_1EC: 	dc.b $4
+	dc.b $52, $60
+	dc.b $12, $66
+	dc.b $B2, $68
+	dc.b $2, $74
+DPLC_3959_1F5: 	dc.b $2
+	dc.b $72, $75
+	dc.b $B2, $7D
+DPLC_3959_1FA: 	dc.b $4
+	dc.b $52, $60
+	dc.b $12, $89
+	dc.b $B2, $8B
+	dc.b $2, $74
+DPLC_3959_203: 	dc.b $2
+	dc.b $72, $75
+	dc.b $B2, $97
+DPLC_3959_208: 	dc.b $1
+	dc.b $F2, $A3
+DPLC_3959_20B: 	dc.b $1
+	dc.b $F2, $B3
+DPLC_3959_20E: 	dc.b $1
+	dc.b $F2, $C3
+DPLC_3959_211: 	dc.b $1
+	dc.b $F2, $D3
+DPLC_3959_214: 	dc.b $1
+	dc.b $F2, $E3
+DPLC_3959_217: 	dc.b $2
+	dc.b $B2, $F3
+	dc.b $22, $FF
+DPLC_3959_21C: 	dc.b $1
+	dc.b $F3, $2
+DPLC_3959_21F: 	dc.b $2
+	dc.b $B3, $12
+	dc.b $23, $1E
+DPLC_3959_224: 	dc.b $1
+	dc.b $F3, $21
+DPLC_3959_227: 	dc.b $2
+	dc.b $53, $31
+	dc.b $B3, $37
+DPLC_3959_22C: 	dc.b $4
+	dc.b $53, $43
+	dc.b $73, $49
+	dc.b $13, $51
+	dc.b $3, $53
+DPLC_3959_235: 	dc.b $4
+	dc.b $13, $54
+	dc.b $73, $56
+	dc.b $23, $5E
+	dc.b $3, $61
+DPLC_3959_23E: 	dc.b $3
+	dc.b $23, $62
+	dc.b $23, $65
+	dc.b $F3, $68
+DPLC_3959_245: 	dc.b $3
+	dc.b $B3, $78
+	dc.b $73, $84
+	dc.b $0, $78
+DPLC_3959_24C: 	dc.b $3
+	dc.b $73, $8C
+	dc.b $33, $94
+	dc.b $23, $98
+DPLC_3959_253: 	dc.b $1
+	dc.b $83, $9B
+DPLC_3959_256: 	dc.b $3
+	dc.b $73, $A4
+	dc.b $3, $AC
+	dc.b $33, $AD
+DPLC_3959_25D: 	dc.b $3
+	dc.b $73, $B1
+	dc.b $33, $B9
+	dc.b $23, $BD
+DPLC_3959_264: 	dc.b $3
+	dc.b $B3, $C0
+	dc.b $13, $CC
+	dc.b $3, $CE
+DPLC_3959_26B: 	dc.b $4
+	dc.b $B3, $CF
+	dc.b $33, $DB
+	dc.b $3, $DF
+	dc.b $3, $E0
+DPLC_3959_274: 	dc.b $4
+	dc.b $B3, $E1
+	dc.b $33, $ED
+	dc.b $3, $F1
+	dc.b $3, $F2
+DPLC_3959_27D: 	dc.b $5
+	dc.b $83, $F3
+	dc.b $13, $FC
+	dc.b $53, $FE
+	dc.b $14, $4
+	dc.b $4, $6
+DPLC_3959_288: 	dc.b $5
+	dc.b $84, $7
+	dc.b $14, $10
+	dc.b $53, $FE
+	dc.b $14, $4
+	dc.b $4, $6
+DPLC_3959_293: 	dc.b $2
+	dc.b $84, $12
+	dc.b $74, $1B
+DPLC_3959_298: 	dc.b $3
+	dc.b $84, $23
+	dc.b $24, $2C
+	dc.b $14, $2F
+DPLC_3959_29F: 	dc.b $2
+	dc.b $84, $31
+	dc.b $74, $3A
+DPLC_3959_2A4: 	dc.b $3
+	dc.b $84, $23
+	dc.b $24, $42
+	dc.b $14, $45
+DPLC_3959_2AB: 	dc.b $2
+	dc.b $54, $47
+	dc.b $B4, $4D
+DPLC_3959_2B0: 	dc.b $3
+	dc.b $84, $59
+	dc.b $34, $62
+	dc.b $4, $66
+DPLC_3959_2B7: 	dc.b $3
+	dc.b $74, $67
+	dc.b $14, $6F
+	dc.b $B4, $71
+DPLC_3959_2BE: 	dc.b $5
+	dc.b $74, $7D
+	dc.b $14, $85
+	dc.b $54, $87
+	dc.b $34, $8D
+	dc.b $4, $91
+DPLC_3959_2C9: 	dc.b $5
+	dc.b $74, $92
+	dc.b $14, $85
+	dc.b $54, $9A
+	dc.b $34, $8D
+	dc.b $4, $91
+DPLC_3959_2D4: 	dc.b $2
+	dc.b $24, $A0
+	dc.b $F4, $A3
+DPLC_3959_2D9: 	dc.b $3
+	dc.b $24, $B3
+	dc.b $B4, $B6
+	dc.b $24, $C2
+DPLC_3959_2E0: 	dc.b $1
+	dc.b $B4, $C5
+DPLC_3959_2E3: 	dc.b $1
+	dc.b $54, $D1
+DPLC_3959_2E6: 	dc.b $1
+	dc.b $14, $D7
+DPLC_3959_2E9: 	dc.b $3
+	dc.b $73, $8C
+	dc.b $33, $94
+	dc.b $23, $98
+DPLC_3959_2F0: 	dc.b $3
+	dc.b $73, $A4
+	dc.b $3, $AC
+	dc.b $33, $AD
+DPLC_3959_2F7: 	dc.b $3
+	dc.b $B4, $D9
+	dc.b $14, $E5
+	dc.b $34, $E7
+DPLC_3959_2FE: 	dc.b $3
+	dc.b $54, $EB
+	dc.b $B4, $F1
+	dc.b $10, $74
+DPLC_3959_305: 	dc.b $2
+	dc.b $F4, $FD
+	dc.b $25, $D
+	even
