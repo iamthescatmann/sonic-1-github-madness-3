@@ -40709,7 +40709,7 @@ Music83:	incbin	sound\music83.bin
 		even
 Music84:	include	sound\music84.asm
 		even
-Music85:	incbin	sound\music85.bin
+Music85:	incbin	sound\glass2.bin
 		even
 Music86:	incbin	sound\music86.bin
 		even
@@ -40727,7 +40727,7 @@ Music8C:	incbin	sound\music8C.bin
 		even
 Music8D:	incbin	sound\music8D.bin
 		even
-Music8E:	incbin	sound\music8E.bin
+Music8E:	incbin	sound\fle.bin
 		even
 Music8F:	incbin	sound\music8F.bin
 		even
