@@ -3888,7 +3888,8 @@ loc_39E8:
 		move.b	d0,($FFFFFE2C).w ; clear shield
 		move.b	d0,($FFFFFE2D).w ; clear invincibility
 		move.b	d0,($FFFFFE2E).w ; clear speed shoes
-		move.b	d0,($FFFFFE2F).w
+		; move.b	d0,($FFFFFE2F).w
+		andi.b	#%00000001,($FFFFFE2F).w	; GMZ: Clear every flag in FE2F aside from reversed controls
 		move.w	d0,($FFFFFE08).w
 		move.w	d0,($FFFFFE02).w
 		move.w	d0,($FFFFFE04).w
@@ -12728,7 +12729,9 @@ Obj2E_RingSound:
 Obj2E_ChkS:
 		cmpi.b	#7,d0		; does monitor contain 'S'
 		bne.s	Obj2E_ChkEnd
-		nop	
+		; nop	
+		moveq	#1,d1
+		eor.b	d1,($FFFFFE2F).w	; GMZ: Set reverse controls flag when broken, revert when another monitor of same type is broken again
 
 Obj2E_ChkEnd:
 		rts			; 'S' and goggles monitors do nothing
@@ -18389,6 +18392,12 @@ Obj0D_SonicRun:				; XREF: Obj0D_Index
 		btst	#1,($FFFFD022).w
 		bne.s	loc_EC70
 		move.b	#1,($FFFFF7CC).w ; lock	controls
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		beq.s	Obj0D_MoveLeft	; GMZ: If not, branch
+		move.w	#$400,($FFFFF602).w ; make Sonic run to	the right
+		bra.s	loc_EC70
+
+Obj0D_MoveLeft:
 		move.w	#$800,($FFFFF602).w ; make Sonic run to	the right
 
 loc_EC70:
@@ -23840,11 +23849,19 @@ Sonic_Move:				; XREF: Obj01_MdNormal
 		bne.w	Obj01_ResetScr
 		btst	#2,($FFFFF602).w ; is left being pressed?
 		beq.s	Obj01_NotLeft	; if not, branch
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		bne.s	Obj01_MoveRight	; GMZ: If yes, branch
 		bsr.w	Sonic_MoveLeft
 
 Obj01_NotLeft:
 		btst	#3,($FFFFF602).w ; is right being pressed?
 		beq.s	Obj01_NotRight	; if not, branch
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		beq.s	Obj01_MoveRight	; GMZ: If not, branch
+		bsr.w	Sonic_MoveLeft
+		bra.s	Obj01_NotRight
+
+Obj01_MoveRight:
 		bsr.w	Sonic_MoveRight
 
 Obj01_NotRight:
@@ -24134,11 +24151,19 @@ Sonic_RollSpeed:			; XREF: Obj01_MdRoll
 		bne.s	loc_13188
 		btst	#2,($FFFFF602).w ; is left being pressed?
 		beq.s	loc_1317C	; if not, branch
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		bne.s	SonicRS_RollRight	; GMZ: If yes, branch
 		bsr.w	Sonic_RollLeft
 
 loc_1317C:
 		btst	#3,($FFFFF602).w ; is right being pressed?
 		beq.s	loc_13188	; if not, branch
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		beq.s	SonicRS_RollRight	; GMZ: If not, branch
+		bsr.w	Sonic_RollLeft
+		bra.s	loc_13188
+
+SonicRS_RollRight:
 		bsr.w	Sonic_RollRight
 
 loc_13188:
@@ -24256,17 +24281,33 @@ Sonic_ChgJumpDir:			; XREF: Obj01_MdJump; Obj01_MdJump2
 		move.w	$10(a0),d0
 		btst	#2,($FFFFF602).w ; is left being pressed?
 		beq.s	loc_13278	; if not, branch
-		bset	#0,$22(a0)
-		sub.w	d5,d0
-		move.w	d6,d1
-		neg.w	d1
-		cmp.w	d1,d0
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		bne.s	SonicCJD_JumpRight	; GMZ: If yes, branch
+		bsr.w	SonicCJD_JumpLeft
 		bgt.s	loc_13278
 		move.w	d1,d0
 
 loc_13278:
 		btst	#3,($FFFFF602).w ; is right being pressed?
 		beq.s	Obj01_JumpMove	; if not, branch
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		beq.s	SonicCJD_JumpRight	; GMZ: If not, branch
+		bsr.w	SonicCJD_JumpLeft
+		bgt.s	Obj01_JumpMove
+		move.w	d1,d0
+		bra.s	Obj01_JumpMove
+
+SonicCJD_JumpLeft:
+		bset	#0,$22(a0)
+		sub.w	d5,d0
+		move.w	d6,d1
+		neg.w	d1
+		cmp.w	d1,d0
+		; bgt.s	loc_13278
+		; move.w	d1,d0
+		rts
+
+SonicCJD_JumpRight:
 		bclr	#0,$22(a0)
 		add.w	d5,d0
 		cmp.w	d6,d0
@@ -34353,7 +34394,15 @@ Obj3E_Switched:				; XREF: Obj3E_Index
 		clr.b	($FFFFFE1E).w	; stop time counter
 		clr.b	($FFFFF7AA).w	; lock screen position
 		move.b	#1,($FFFFF7CC).w ; lock	controls
+		btst	#0,($FFFFFE2F).w	; GMZ: Have we got a reverse control power up?
+		beq.s	Obj3E_MoveLeft	; GMZ: If not, branch
+		move.w	#$400,($FFFFF602).w ; make Sonic run to	the right
+		bra.s	Obj3E_ContinueCode
+
+Obj3E_MoveLeft:
 		move.w	#$800,($FFFFF602).w ; make Sonic run to	the right
+
+Obj3E_ContinueCode:
 		clr.b	$25(a0)
 		bclr	#3,($FFFFD022).w
 		bset	#1,($FFFFD022).w
@@ -40652,7 +40701,7 @@ Kos_Z80:	incbin	sound\z80_1.bin
 		dc.w (((EndOfRom-SegaPCM)&$FF)<<8)+(((EndOfRom-SegaPCM)&$FF00)>>8)
 		incbin	sound\z80_2.bin
 		even
-Music81:	incbin	sound\music81.bin
+Music81:	incbin	sound\jahl.bin
 		even
 Music82:	incbin	sound\music82.bin
 		even
@@ -40660,7 +40709,7 @@ Music83:	incbin	sound\music83.bin
 		even
 Music84:	include	sound\music84.asm
 		even
-Music85:	incbin	sound\music85.bin
+Music85:	incbin	sound\glass2.bin
 		even
 Music86:	incbin	sound\music86.bin
 		even
@@ -40678,7 +40727,7 @@ Music8C:	incbin	sound\music8C.bin
 		even
 Music8D:	incbin	sound\music8D.bin
 		even
-Music8E:	incbin	sound\music8E.bin
+Music8E:	incbin	sound\fle.bin
 		even
 Music8F:	incbin	sound\music8F.bin
 		even
