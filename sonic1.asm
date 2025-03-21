@@ -40750,7 +40750,7 @@ SoundB2:	incbin	sound\soundB2.bin
 		even
 SoundB3:	incbin	sound\soundB3.bin
 		even
-SoundB4:	incbin	sound\soundB4.bin
+SoundB4:	include	sound\soundB4.asm
 		even
 SoundB5:	incbin	sound\soundB5.bin
 		even

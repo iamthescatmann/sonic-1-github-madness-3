@@ -48344,7 +48344,7 @@
 000704E0 0000                       	smpsHeaderVoice     music84_Voices
 000704E2 0603                       	smpsHeaderChan      $06, $03
 000704E4 0205                       	smpsHeaderTempo     $02, $05
-000704E6                            
+000704E6                            
 000704EA 0000 0000                  	smpsHeaderFM        music84_FM1,	$00, $00
 000704EE 0000 0000                  	smpsHeaderFM        music84_FM2,	$00, $00
 000704F2 0000 0000                  	smpsHeaderFM        music84_FM3,	$00, $00
@@ -48353,7 +48353,7 @@
 000704FE 0000 0000 0000             	smpsHeaderPSG       music84_PSG1,	$00, $00, $00, $00
 00070504 0000 0000 0000             	smpsHeaderPSG       music84_PSG2,	$00, $00, $00, $00
 0007050A 0000 0000 0000             	smpsHeaderPSG       music84_PSG3,	$00, $00, $00, $00
-00070510                            
+00070510                            
 00070510                            ; FM1 Data
 00070510                            music84_FM1:
 00070510 E0C0                       	smpsPan             panCenter, $00
@@ -48375,7 +48375,7 @@
 0007053F 9603 A203 8001             	dc.b	nA1, $03, nA2, $03, nRst, $01
 00070545 E107                       	smpsAlterNote       $07
 00070547 9B03                       	dc.b	nD2, $03
-00070549                            
+00070549                            
 00070549                            music84_Jump04:
 00070549 E107                       	smpsAlterNote       $07
 0007054B 9B03 8001                  	dc.b	nD2, $03, nRst, $01
@@ -49306,7 +49306,7 @@
 00071049 E107                       	smpsAlterNote       $07
 0007104B 9B03 8001                  	dc.b	nD2, $03, nRst, $01
 0007104F F6F4 F8                    	smpsJump            music84_Jump04
-00071052                            
+00071052                            
 00071052                            ; FM2 Data
 00071052                            music84_FM2:
 00071052 E0C0                       	smpsPan             panCenter, $00
@@ -49334,7 +49334,7 @@
 00071094 E107                       	smpsAlterNote       $07
 00071096 E606                       	smpsAlterVol        $06
 00071098 BF03                       	dc.b	nD5, $03
-0007109A                            
+0007109A                            
 0007109A                            music84_Jump03:
 0007109A E108                       	smpsAlterNote       $08
 0007109C C103 8001                  	dc.b	nE5, $03, nRst, $01
@@ -50913,7 +50913,7 @@
 00071EE5 BF03 8001                  	dc.b	nD5, $03, nRst, $01
 00071EE9 E603                       	smpsAlterVol        $03
 00071EEB F6F1 AD                    	smpsJump            music84_Jump03
-00071EEE                            
+00071EEE                            
 00071EEE                            ; FM3 Data
 00071EEE                            music84_FM3:
 00071EEE E0C0                       	smpsPan             panCenter, $00
@@ -50941,7 +50941,7 @@
 00071F32 E109                       	smpsAlterNote       $09
 00071F34 E609                       	smpsAlterVol        $09
 00071F36 B603                       	dc.b	nF4, $03
-00071F38                            
+00071F38                            
 00071F38                            music84_Jump02:
 00071F38 E70A                       	dc.b	smpsNoAttack, $0A
 00071F3A E103                       	smpsAlterNote       $03
@@ -52531,7 +52531,7 @@
 00072D88 B604                       	dc.b	nF4, $04
 00072D8A E602                       	smpsAlterVol        $02
 00072D8C F6F1 AA                    	smpsJump            music84_Jump02
-00072D8F                            
+00072D8F                            
 00072D8F                            ; FM4 Data
 00072D8F                            music84_FM4:
 00072D91 E040                       	smpsPan             panRight, $00
@@ -52554,7 +52554,7 @@
 00072DC6 E10A                       	smpsAlterNote       $0A
 00072DC8 BD03 8001                  	dc.b	nC5, $03, nRst, $01
 00072DCE 03                         	dc.b	$03
-00072DCF                            
+00072DCF                            
 00072DCF                            music84_Jump01:
 00072DCF E10B                       	smpsAlterNote       $0B
 00072DD1 BF03 8001                  	dc.b	nD5, $03, nRst, $01
@@ -54082,7 +54082,7 @@
 00073BF9 03                         	dc.b	$03
 00073BFA E601                       	smpsAlterVol        $01
 00073BFC F6F1 D1                    	smpsJump            music84_Jump01
-00073BFF                            
+00073BFF                            
 00073BFF                            ; FM5 Data
 00073BFF                            music84_FM5:
 00073C01 E080                       	smpsPan             panLeft, $00
@@ -54102,7 +54102,7 @@
 00073C2F E10A                       	smpsAlterNote       $0A
 00073C31 BD01 8001                  	dc.b	nC5, $01, nRst, $01
 00073C37 03                         	dc.b	$03
-00073C38                            
+00073C38                            
 00073C38                            music84_Jump00:
 00073C38 8004                       	dc.b	nRst, $04
 00073C3A E602                       	smpsAlterVol        $02
@@ -55646,7 +55646,7 @@
 00074A3F 03                         	dc.b	$03
 00074A40 E6FD                       	smpsAlterVol        $FD
 00074A42 F6F1 F4                    	smpsJump            music84_Jump00
-00074A45                            
+00074A45                            
 00074A45                            ; PSG1 Data
 00074A45                            music84_PSG1:
 00074A45 E1FD                       	smpsAlterNote       $FD
@@ -55718,7 +55718,7 @@
 00074ABA 01                         	dc.b	$01
 00074ABB E1FD                       	smpsAlterNote       $FD
 00074ABD 01                         	dc.b	$01
-00074ABE                            
+00074ABE                            
 00074ABE                            music84_Jump07:
 00074ABE E105                       	smpsAlterNote       $05
 00074AC0 8001                       	dc.b	nRst, $01
@@ -57252,7 +57252,7 @@
 000755A0 E100                       	smpsAlterNote       $00
 000755A2 01                         	dc.b	$01
 000755A3 F6F5 19                    	smpsJump            music84_Jump07
-000755A6                            
+000755A6                            
 000755A6                            ; PSG2 Data
 000755A6                            music84_PSG2:
 000755A6 E1FC                       	smpsAlterNote       $FC
@@ -57323,7 +57323,7 @@
 00075619 01                         	dc.b	$01
 0007561A E1FC                       	smpsAlterNote       $FC
 0007561C 01                         	dc.b	$01
-0007561D                            
+0007561D                            
 0007561D                            music84_Jump06:
 0007561D E10A                       	smpsAlterNote       $0A
 0007561F 8001                       	dc.b	nRst, $01
@@ -58875,19 +58875,19 @@
 00076124 EC07                       	smpsPSGAlterVol     $07
 00076126 8008                       	dc.b	nRst, $08
 00076128 F6F4 F3                    	smpsJump            music84_Jump06
-0007612B                            
+0007612B                            
 0007612B                            ; PSG3 Data
 0007612B                            music84_PSG3:
 0007612B F500                       	smpsPSGvoice        $00
 0007612D E1FF                       	smpsAlterNote       $FF
 0007612F EC0F                       	smpsPSGAlterVol     $0F
 00076131 803A                       	dc.b	nRst, $3A
-00076133                            
+00076133                            
 00076133                            music84_Jump05:
 00076133 8068 6868 6868 6868 6868+  	dc.b	nRst, $68, $68, $68, $68, $68, $68, $68, $68, $68, $68, $68
 0007613F 6868 6868 6868 6868 6802   	dc.b	$68, $68, $68, $68, $68, $68, $68, $68, $68, $02
 00076149 F6FF E8                    	smpsJump            music84_Jump05
-0007614C                            
+0007614C                            
 0007614C                            ; DAC Data
 0007614C                            music84_DAC:
 0007614C E0C0                       	smpsPan             panCenter, $00
@@ -58968,7 +58968,7 @@
 000764C6 8103 8207 8203 8204 8107+  	dc.b	dKick, $03, dSnare, $07, dSnare, $03, dSnare, $04, dKick, $07, dKick, $17
 000764D2 E0C0                       	smpsPan             panCenter, $00
 000764D4 F2                         	smpsStop
-000764D5                            
+000764D5                            
 000764D5                            music84_Voices:
 000764D5                            ;	Voice $00
 000764D5                            ;	$3D
@@ -58987,7 +58987,7 @@
 000764D5                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
 000764D5                            	smpsVcReleaseRate   $08, $08, $08, $07
 000764D5 3D41 3141 5111 1111 110A+  	smpsVcTotalLevel    $14, $20, $14, $1A
-000764EE                            
+000764EE                            
 000764EE                            ;	Voice $01
 000764EE                            ;	$04
 000764EE                            ;	$5A, $41, $3A, $41, 	$5F, $1F, $5F, $1F, 	$00, $0E, $00, $0E
@@ -59005,7 +59005,7 @@
 000764EE                            	smpsVcDecayLevel    $08, $0E, $08, $0E
 000764EE                            	smpsVcReleaseRate   $06, $06, $06, $06
 000764EE 045A 413A 415F 1F5F 1F00+  	smpsVcTotalLevel    $10, $19, $10, $19
-00076507                            
+00076507                            
 00076507                            ;	Voice $02
 00076507                            ;	$30
 00076507                            ;	$6C, $03, $21, $41, 	$14, $1F, $1F, $1F, 	$0D, $0C, $0E, $01
@@ -59023,7 +59023,7 @@
 00076507                            	smpsVcDecayLevel    $08, $0B, $0C, $0F
 00076507                            	smpsVcReleaseRate   $09, $0B, $08, $0F
 00076507 306C 0321 4114 1F1F 1F0D+  	smpsVcTotalLevel    $10, $14, $27, $24
-00076520                            
+00076520                            
 00076520                            ;	Voice $03
 00076520                            ;	$3A
 00076520                            ;	$01, $21, $61, $41, 	$14, $14, $19, $18, 	$09, $09, $0D, $09
@@ -59041,7 +59041,7 @@
 00076520                            	smpsVcDecayLevel    $0E, $0F, $0B, $0F
 00076520                            	smpsVcReleaseRate   $08, $0F, $0F, $07
 00076520 3A01 2161 4114 1419 1809+  	smpsVcTotalLevel    $10, $1E, $16, $26
-00076539                            
+00076539                            
 00076539                            ;	Voice $04
 00076539                            ;	$3C
 00076539                            ;	$3A, $02, $00, $70, 	$1F, $10, $1F, $10, 	$00, $00, $00, $00
@@ -59059,7 +59059,7 @@
 00076539                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
 00076539                            	smpsVcReleaseRate   $0A, $02, $0A, $02
 00076539 3C3A 0200 701F 101F 1000+  	smpsVcTotalLevel    $18, $24, $1F, $30
-00076552                            
+00076552                            
 00076552                            ;	Voice $05
 00076552                            ;	$38
 00076552                            ;	$00, $21, $61, $41, 	$10, $1F, $1F, $1F, 	$17, $00, $03, $00
@@ -59077,8 +59077,8 @@
 00076552                            	smpsVcDecayLevel    $0F, $0F, $0F, $0A
 00076552                            	smpsVcReleaseRate   $08, $05, $05, $05
 00076552 3800 2161 4110 1F1F 1F17+  	smpsVcTotalLevel    $14, $11, $10, $1D
-0007656B                            
-0007656B                            
+0007656B                            
+0007656B                            
 0007656C 00                         		even
 0007656C                            Music85:	incbin	sound\music85.bin
 000769B8                            		even
@@ -59089,149 +59089,191 @@
 000770EE                            Music88:	incbin	sound\music88.bin
 000771DC                            		even
 000771DC                            Music89:	incbin	sound\music89.bin
-00077508                            		even
-00077508                            Music8A:	incbin	sound\music8A.bin
-000776B4                            		even
-000776B4                            Music8B:	incbin	sound\music8B.bin
-0007794E                            		even
-0007794E                            Music8C:	incbin	sound\music8C.bin
-00077B6A                            		even
-00077B6A                            Music8D:	incbin	sound\music8D.bin
-00077D86                            		even
-00077D86                            Music8E:	incbin	sound\music8E.bin
-00077EDC                            		even
-00077EDC                            Music8F:	incbin	sound\music8F.bin
-0007802C                            		even
-0007802C                            Music90:	incbin	sound\music90.bin
-0007818A                            		even
-0007818A                            Music91:	incbin	sound\music91.bin
-00079458                            		even
-00079458                            Music92:	incbin	sound\music92.bin
-00079582                            		even
-00079582                            Music93:	incbin	sound\music93.bin
-00079650                            		even
-00079650                            ; ---------------------------------------------------------------------------
-00079650                            ; Sound	effect pointers
-00079650                            ; ---------------------------------------------------------------------------
-00079650 0000 0000 0000 0000 0000+  SoundIndex:	dc.l SoundA0, SoundA1, SoundA2
-0007965C 0000 0000 0000 0000 0000+  		dc.l SoundA3, SoundA4, SoundA5
-00079668 0000 0000 0000 0000 0000+  		dc.l SoundA6, SoundA7, SoundA8
-00079674 0000 0000 0000 0000 0000+  		dc.l SoundA9, SoundAA, SoundAB
-00079680 0000 0000 0000 0000 0000+  		dc.l SoundAC, SoundAD, SoundAE
-0007968C 0000 0000 0000 0000 0000+  		dc.l SoundAF, SoundB0, SoundB1
-00079698 0000 0000 0000 0000 0000+  		dc.l SoundB2, SoundB3, SoundB4
-000796A4 0000 0000 0000 0000 0000+  		dc.l SoundB5, SoundB6, SoundB7
-000796B0 0000 0000 0000 0000 0000+  		dc.l SoundB8, SoundB9, SoundBA
-000796BC 0000 0000 0000 0000 0000+  		dc.l SoundBB, SoundBC, SoundBD
-000796C8 0000 0000 0000 0000 0000+  		dc.l SoundBE, SoundBF, SoundC0
-000796D4 0000 0000 0000 0000 0000+  		dc.l SoundC1, SoundC2, SoundC3
-000796E0 0000 0000 0000 0000 0000+  		dc.l SoundC4, SoundC5, SoundC6
-000796EC 0000 0000 0000 0000 0000+  		dc.l SoundC7, SoundC8, SoundC9
-000796F8 0000 0000 0000 0000 0000+  		dc.l SoundCA, SoundCB, SoundCC
-00079704 0000 0000 0000 0000 0000+  		dc.l SoundCD, SoundCE, SoundCF
-00079710 0000 0000                  SoundD0Index:	dc.l SoundD0
-00079714                            SoundA0:	incbin	sound\soundA0.bin
-0007972A                            		even
-0007972A                            SoundA1:	incbin	sound\soundA1.bin
-00079754                            		even
-00079754                            SoundA2:	incbin	sound\soundA2.bin
-00079774                            		even
-00079774                            SoundA3:	incbin	sound\soundA3.bin
-000797A6                            		even
-000797A6                            SoundA4:	incbin	sound\soundA4.bin
-000797DC                            		even
-000797DC                            SoundA5:	incbin	sound\soundA5.bin
-00079808                            		even
-00079808                            SoundA6:	incbin	sound\soundA6.bin
-00079838                            		even
-00079838                            SoundA7:	incbin	sound\soundA7.bin
-00079868                            		even
-00079868                            SoundA8:	incbin	sound\soundA8.bin
-0007989C                            		even
-0007989C                            SoundA9:	incbin	sound\soundA9.bin
-000798AE                            		even
-000798AE                            SoundAA:	incbin	sound\soundAA.bin
-000798F0                            		even
-000798F0                            SoundAB:	incbin	sound\soundAB.bin
-00079910                            		even
-00079910                            SoundAC:	incbin	sound\soundAC.bin
-00079944                            		even
-00079944                            SoundAD:	incbin	sound\soundAD.bin
-0007997A                            		even
-0007997A                            SoundAE:	incbin	sound\soundAE.bin
-000799C4                            		even
-000799C4                            SoundAF:	incbin	sound\soundAF.bin
-000799F2                            		even
-000799F2                            SoundB0:	incbin	sound\soundB0.bin
-00079A24                            		even
-00079A24                            SoundB1:	incbin	sound\soundB1.bin
-00079A50                            		even
-00079A50                            SoundB2:	incbin	sound\soundB2.bin
-00079AA0                            		even
-00079AA0                            SoundB3:	incbin	sound\soundB3.bin
-00079AEA                            		even
-00079AEA                            SoundB4:	incbin	sound\soundB4.bin
-00079B46                            		even
-00079B46                            SoundB5:	incbin	sound\soundB5.bin
-00079B74                            		even
-00079B74                            SoundB6:	incbin	sound\soundB6.bin
-00079B92                            		even
-00079B92                            SoundB7:	incbin	sound\soundB7.bin
-00079BCE                            		even
-00079BCE                            SoundB8:	incbin	sound\soundB8.bin
-00079BEC                            		even
-00079BEC                            SoundB9:	incbin	sound\soundB9.bin
-00079C50                            		even
-00079C50                            SoundBA:	incbin	sound\soundBA.bin
-00079C78                            		even
-00079C78                            SoundBB:	incbin	sound\soundBB.bin
-00079CA4                            		even
-00079CA4                            SoundBC:	incbin	sound\soundBC.bin
-00079CE6                            		even
-00079CE6                            SoundBD:	incbin	sound\soundBD.bin
-00079D3A                            		even
-00079D3A                            SoundBE:	incbin	sound\soundBE.bin
-00079D74                            		even
-00079D74                            SoundBF:	incbin	sound\soundBF.bin
-00079DE6                            		even
-00079DE6                            SoundC0:	incbin	sound\soundC0.bin
-00079E14                            		even
-00079E14                            SoundC1:	incbin	sound\soundC1.bin
-00079E4E                            		even
-00079E4E                            SoundC2:	incbin	sound\soundC2.bin
-00079E78                            		even
-00079E78                            SoundC3:	incbin	sound\soundC3.bin
-00079EF2                            		even
-00079EF2                            SoundC4:	incbin	sound\soundC4.bin
-00079F1A                            		even
-00079F1A                            SoundC5:	incbin	sound\soundC5.bin
-00079F82                            		even
-00079F82                            SoundC6:	incbin	sound\soundC6.bin
-00079FC4                            		even
-00079FC4                            SoundC7:	incbin	sound\soundC7.bin
-00079FF2                            		even
-00079FF2                            SoundC8:	incbin	sound\soundC8.bin
-0007A004                            		even
-0007A004                            SoundC9:	incbin	sound\soundC9.bin
-0007A032                            		even
-0007A032                            SoundCA:	incbin	sound\soundCA.bin
-0007A060                            		even
-0007A060                            SoundCB:	incbin	sound\soundCB.bin
-0007A0AC                            		even
-0007A0AC                            SoundCC:	incbin	sound\soundCC.bin
-0007A0E6                            		even
-0007A0E6                            SoundCD:	incbin	sound\soundCD.bin
-0007A0F4                            		even
-0007A0F4                            SoundCE:	incbin	sound\soundCE.bin
-0007A122                            		even
-0007A122                            SoundCF:	incbin	sound\soundCF.bin
-0007A15A                            		even
-0007A15A                            SoundD0:	incbin	sound\soundD0.bin
-0007A194                            		even
-0007A194                            SegaPCM:	incbin	sound\segapcm.bin
-00080B0C                            SegaPCM_end:	even
-00080B0C                            
-00080B0C                            ; end of 'ROM'
-00080B0C                            EndOfRom:
-00080B0C                            
-00080B0C                            
+0007B0A4 00                         		even
+0007B0A4                            Music8A:	incbin	sound\music8A.bin
+0007B26E                            		even
+0007B26E                            Music8B:	incbin	sound\music8B.bin
+0007B508                            		even
+0007B508                            Music8C:	incbin	sound\music8C.bin
+0007B724                            		even
+0007B724                            Music8D:	incbin	sound\music8D.bin
+0007B940                            		even
+0007B940                            Music8E:	incbin	sound\music8E.bin
+0007BA96                            		even
+0007BA96                            Music8F:	incbin	sound\music8F.bin
+0007BBE6                            		even
+0007BBE6                            Music90:	incbin	sound\music90.bin
+0007BD44                            		even
+0007BD44                            Music91:	incbin	sound\music91.bin
+0007D012                            		even
+0007D012                            Music92:	incbin	sound\music92.bin
+0007D13C                            		even
+0007D13C                            Music93:	incbin	sound\music93.bin
+0007D20A                            		even
+0007D20A                            ; ---------------------------------------------------------------------------
+0007D20A                            ; Sound	effect pointers
+0007D20A                            ; ---------------------------------------------------------------------------
+0007D20A 0000 0000 0000 0000 0000+  SoundIndex:	dc.l SoundA0, SoundA1, SoundA2
+0007D216 0000 0000 0000 0000 0000+  		dc.l SoundA3, SoundA4, SoundA5
+0007D222 0000 0000 0000 0000 0000+  		dc.l SoundA6, SoundA7, SoundA8
+0007D22E 0000 0000 0000 0000 0000+  		dc.l SoundA9, SoundAA, SoundAB
+0007D23A 0000 0000 0000 0000 0000+  		dc.l SoundAC, SoundAD, SoundAE
+0007D246 0000 0000 0000 0000 0000+  		dc.l SoundAF, SoundB0, SoundB1
+0007D252 0000 0000 0000 0000 0000+  		dc.l SoundB2, SoundB3, SoundB4
+0007D25E 0000 0000 0000 0000 0000+  		dc.l SoundB5, SoundB6, SoundB7
+0007D26A 0000 0000 0000 0000 0000+  		dc.l SoundB8, SoundB9, SoundBA
+0007D276 0000 0000 0000 0000 0000+  		dc.l SoundBB, SoundBC, SoundBD
+0007D282 0000 0000 0000 0000 0000+  		dc.l SoundBE, SoundBF, SoundC0
+0007D28E 0000 0000 0000 0000 0000+  		dc.l SoundC1, SoundC2, SoundC3
+0007D29A 0000 0000 0000 0000 0000+  		dc.l SoundC4, SoundC5, SoundC6
+0007D2A6 0000 0000 0000 0000 0000+  		dc.l SoundC7, SoundC8, SoundC9
+0007D2B2 0000 0000 0000 0000 0000+  		dc.l SoundCA, SoundCB, SoundCC
+0007D2BE 0000 0000 0000 0000 0000+  		dc.l SoundCD, SoundCE, SoundCF
+0007D2CA 0000 0000                  SoundD0Index:	dc.l SoundD0
+0007D2CE                            SoundA0:	incbin	sound\soundA0.bin
+0007D2E4                            		even
+0007D2E4                            SoundA1:	incbin	sound\soundA1.bin
+0007D30E                            		even
+0007D30E                            SoundA2:	incbin	sound\soundA2.bin
+0007D32E                            		even
+0007D32E                            SoundA3:	incbin	sound\soundA3.bin
+0007D360                            		even
+0007D360                            SoundA4:	incbin	sound\soundA4.bin
+0007D396                            		even
+0007D396                            SoundA5:	incbin	sound\soundA5.bin
+0007D3C2                            		even
+0007D3C2                            SoundA6:	incbin	sound\soundA6.bin
+0007D3F2                            		even
+0007D3F2                            SoundA7:	incbin	sound\soundA7.bin
+0007D422                            		even
+0007D422                            SoundA8:	incbin	sound\soundA8.bin
+0007D456                            		even
+0007D456                            SoundA9:	incbin	sound\soundA9.bin
+0007D468                            		even
+0007D468                            SoundAA:	incbin	sound\soundAA.bin
+0007D4AA                            		even
+0007D4AA                            SoundAB:	incbin	sound\soundAB.bin
+0007D4CA                            		even
+0007D4CA                            SoundAC:	incbin	sound\soundAC.bin
+0007D4FE                            		even
+0007D4FE                            SoundAD:	incbin	sound\soundAD.bin
+0007D534                            		even
+0007D534                            SoundAE:	incbin	sound\soundAE.bin
+0007D57E                            		even
+0007D57E                            SoundAF:	incbin	sound\soundAF.bin
+0007D5AC                            		even
+0007D5AC                            SoundB0:	incbin	sound\soundB0.bin
+0007D5DE                            		even
+0007D5DE                            SoundB1:	incbin	sound\soundB1.bin
+0007D60A                            		even
+0007D60A                            SoundB2:	incbin	sound\soundB2.bin
+0007D65A                            		even
+0007D65A                            SoundB3:	incbin	sound\soundB3.bin
+0007D6A4                            		even
+0007D6A4                            SoundB4:	include	sound\soundB4.asm
+0007D6A4                            SndB4_Bumper_Header:
+0007D6A4 =00000001                  smpsHeaderStartSong = 1
+0007D6A4 0000                       	smpsHeaderVoice     SndB4_Bumper_Voices
+0007D6A6 01                         	smpsHeaderTempoSFX  $01
+0007D6A7 03                         	smpsHeaderChanSFX   $03
+0007D6A8                            
+0007D6BA                            
+0007D6BA                            ; FM5 Data
+0007D6BA                            SndB4_Bumper_FM5:
+0007D6BC F600 00                    	smpsJump            SndB4_Bumper_Jump00
+0007D6BF                            
+0007D6BF                            ; FM4 Data
+0007D6BF                            SndB4_Bumper_FM4:
+0007D6BF F2                         	smpsStop
+0007D6C0                            
+0007D6C0                            SndB4_Bumper_Jump00:
+0007D6C0 A020                       	dc.b	nG2, $20
+0007D6C2 F2                         	smpsStop
+0007D6C3                            
+0007D6C3                            ; FM3 Data
+0007D6C3                            SndB4_Bumper_FM3:
+0007D6C3 F2                         	smpsStop
+0007D6C4                            
+0007D6C4                            SndB4_Bumper_Voices:
+0007D6C4                            ;	Voice $00
+0007D6C4                            ;	$32
+0007D6C4                            ;	$04, $20, $70, $70, 	$1F, $1F, $1F, $1F, 	$09, $00, $00, $08
+0007D6C4                            ;	$09, $00, $00, $0B, 	$00, $00, $00, $0F, 	$0C, $00, $30, $00
+0007D6C4                            	smpsVcAlgorithm     $02
+0007D6C4                            	smpsVcFeedback      $06
+0007D6C4                            	smpsVcUnusedBits    $00
+0007D6C4                            	smpsVcDetune        $07, $07, $02, $00
+0007D6C4                            	smpsVcCoarseFreq    $00, $00, $00, $04
+0007D6C4                            	smpsVcRateScale     $00, $00, $00, $00
+0007D6C4                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+0007D6C4                            	smpsVcAmpMod        $00, $00, $00, $00
+0007D6C4                            	smpsVcDecayRate1    $08, $00, $00, $09
+0007D6C4                            	smpsVcDecayRate2    $0B, $00, $00, $09
+0007D6C4                            	smpsVcDecayLevel    $00, $00, $00, $00
+0007D6C4                            	smpsVcReleaseRate   $0F, $00, $00, $00
+0007D6C4 3204 2070 701F 1F1F 1F09+  	smpsVcTotalLevel    $00, $30, $00, $0C
+0007D6C4 3204 2070 701F 1F1F 1F09+  	smpsVcTotalLevel    $00, $30, $00, $0C
+0007D6DE 00                         		even
+0007D6DE                            SoundB5:	incbin	sound\soundB5.bin
+0007D70C                            		even
+0007D70C                            SoundB6:	incbin	sound\soundB6.bin
+0007D72A                            		even
+0007D72A                            SoundB7:	incbin	sound\soundB7.bin
+0007D766                            		even
+0007D766                            SoundB8:	incbin	sound\soundB8.bin
+0007D784                            		even
+0007D784                            SoundB9:	incbin	sound\soundB9.bin
+0007D7E8                            		even
+0007D7E8                            SoundBA:	incbin	sound\soundBA.bin
+0007D810                            		even
+0007D810                            SoundBB:	incbin	sound\soundBB.bin
+0007D83C                            		even
+0007D83C                            SoundBC:	incbin	sound\soundBC.bin
+0007D87E                            		even
+0007D87E                            SoundBD:	incbin	sound\soundBD.bin
+0007D8D2                            		even
+0007D8D2                            SoundBE:	incbin	sound\soundBE.bin
+0007D90C                            		even
+0007D90C                            SoundBF:	incbin	sound\soundBF.bin
+0007D97E                            		even
+0007D97E                            SoundC0:	incbin	sound\soundC0.bin
+0007D9AC                            		even
+0007D9AC                            SoundC1:	incbin	sound\soundC1.bin
+0007D9E6                            		even
+0007D9E6                            SoundC2:	incbin	sound\soundC2.bin
+0007DA10                            		even
+0007DA10                            SoundC3:	incbin	sound\soundC3.bin
+0007DA8A                            		even
+0007DA8A                            SoundC4:	incbin	sound\soundC4.bin
+0007DAB2                            		even
+0007DAB2                            SoundC5:	incbin	sound\soundC5.bin
+0007DB1A                            		even
+0007DB1A                            SoundC6:	incbin	sound\soundC6.bin
+0007DB5C                            		even
+0007DB5C                            SoundC7:	incbin	sound\soundC7.bin
+0007DB8A                            		even
+0007DB8A                            SoundC8:	incbin	sound\soundC8.bin
+0007DB9C                            		even
+0007DB9C                            SoundC9:	incbin	sound\soundC9.bin
+0007DBCA                            		even
+0007DBCA                            SoundCA:	incbin	sound\soundCA.bin
+0007DBF8                            		even
+0007DBF8                            SoundCB:	incbin	sound\soundCB.bin
+0007DC44                            		even
+0007DC44                            SoundCC:	incbin	sound\soundCC.bin
+0007DC7E                            		even
+0007DC7E                            SoundCD:	incbin	sound\soundCD.bin
+0007DC8C                            		even
+0007DC8C                            SoundCE:	incbin	sound\soundCE.bin
+0007DCBA                            		even
+0007DCBA                            SoundCF:	incbin	sound\soundCF.bin
+0007DCF2                            		even
+0007DCF2                            SoundD0:	incbin	sound\soundD0.bin
+0007DD2C                            		even
+0007DD2C                            SegaPCM:	incbin	sound\segapcm.bin
+000846A4                            SegaPCM_end:	even
+000846A4                            
+000846A4                            ; end of 'ROM'
+000846A4                            EndOfRom:
+000846A4                            
+000846A4                            
