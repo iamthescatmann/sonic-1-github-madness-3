@@ -11,6 +11,8 @@ fixheadr.exe s1built.bin
 
 if exist s1built.bin echo The build was successfull else (echo The rom couldn't be build, please place the old files back or make some changes and try again.) 
 
-echo If you think this is an error of the batch file, remove this code happy developing.
+echo If you think this is an error of the batch file, remove this code happy developing
+
+echo Also guys don't write sussy things here, I am trying to improve the building system -Anakama
 
 pause
