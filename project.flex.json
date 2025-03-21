@@ -1,0 +1,58 @@
+{
+    "description": "Flex 2 Project File",
+    "name": "",
+    "objects": [
+        {
+            "uuid": "fb908fa2-af4f-4292-9696-ead3c8d5a5df",
+            "format": "Sonic 1.js",
+            "name": "Title Screen Sonic",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\titleson.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\obj0E.asm",
+                "label": "",
+                "customDefinition": "",
+                "format": "Sonic 1"
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": "",
+                "customDefinition": ""
+            }
+        },
+        {
+            "uuid": "fdfb908f-a2af-4fe2-9216-96ead3c8d5a5",
+            "format": "Sonic 1.js",
+            "name": "Sonic",
+            "palettes": [
+                {
+                    "path": "pallet\\sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artunc\\sonic.bin",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Sonic.asm",
+                "label": "",
+                "customDefinition": "",
+                "format": "Sonic 1"
+            },
+            "dplcs": {
+                "enabled": true,
+                "path": "_inc\\Sonic dynamic pattern load cues.asm",
+                "label": "",
+                "customDefinition": "",
+                "format": "Sonic 1"
+            }
+        }
+    ]
+}
