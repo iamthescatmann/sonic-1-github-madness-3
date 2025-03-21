@@ -3689,7 +3689,13 @@ LevelMenuText:	incbin	misc\menutext.bin
 ; ---------------------------------------------------------------------------
 ; Music	playlist
 ; ---------------------------------------------------------------------------
-MusicList:	incbin	misc\muslist1.bin
+MusicList1:	incbin	misc\muslist1.bin
+		even
+MusicList2:	incbin	misc\muslist2.bin
+		even
+MusicList3:	incbin	misc\muslist3.bin
+		even
+MusicList4:	incbin	misc\muslist4.bin
 		even
 ; ===========================================================================
 
@@ -3806,25 +3812,42 @@ Level_WaterPal:
 		beq.s	Level_GetBgm
 		move.b	($FFFFFE53).w,($FFFFF64E).w
 
+; NineKode begins here - How to play different songs on different acts
+ 
 Level_GetBgm:
 		tst.w	($FFFFFFF0).w
-		bmi.s	loc_3946
+		bmi.w	loc_3946	; change from bmi.s to bmi.w or you'll get an error
 		moveq	#0,d0
 		move.b	($FFFFFE10).w,d0
-		cmpi.w	#$103,($FFFFFE10).w ; is level SBZ3?
-		bne.s	Level_BgmNotLZ4	; if not, branch
-		moveq	#5,d0		; move 5 to d0
-
-Level_BgmNotLZ4:
-		cmpi.w	#$502,($FFFFFE10).w ; is level FZ?
+ 
+		cmpi.b	#$0,($FFFFFE11).w	; is this act 1?
+		bne.s	Level_GetBgm2	; if not, branch
+		lea	(MusicList1).l,a1	; load Music Playlist for Acts 1
+		bra.s	Level_PlayBgm	; go to PlayBgm
+ 
+Level_GetBgm2:
+		cmpi.b	#$1,($FFFFFE11).w	; is this act 2?
+		bne.s	Level_GetBgm3	; if not, branch
+		lea	(MusicList2).l,a1	; load Music Playlist for Acts 2
+		bra.s	Level_PlayBgm	; go to PlayBgm
+ 
+Level_GetBgm3:
+		cmpi.b	#$2,($FFFFFE11).w	; is this act 3?
+		bne.s	Level_GetBgm4	; if not, branch
+		lea	(MusicList3).l,a1	; load Music Playlist for Acts 3
+		bra.s	Level_PlayBgm	; go to PlayBgm
+ 
+Level_GetBgm4:
+		cmpi.b	#$3,($FFFFFE11).w	; is this act 4?
 		bne.s	Level_PlayBgm	; if not, branch
-		moveq	#6,d0		; move 6 to d0
-
+		lea	(MusicList4).l,a1	; load Music Playlist for Acts 4
+ 
 Level_PlayBgm:
-		lea	(MusicList).l,a1 ; load	music playlist
-		move.b	(a1,d0.w),d0	; add d0 to a1
+		move.b	(a1,d0.w),d0	; get d0-th entry from the playlist
 		bsr.w	PlaySound	; play music
 		move.b	#$34,($FFFFD080).w ; load title	card object
+ 
+; NineKode ends here
 
 Level_TtlCard:
 		move.b	#$C,($FFFFF62A).w
@@ -23682,8 +23705,6 @@ Obj01_Modes:	dc.w Obj01_MdNormal-Obj01_Modes
 ; ---------------------------------------------------------------------------
 ; Music	to play	after invincibility wears off
 ; ---------------------------------------------------------------------------
-MusicList2:	incbin	misc\muslist2.bin
-		even
 ; ===========================================================================
 
 Sonic_Display:				; XREF: loc_12C7E
@@ -23696,27 +23717,49 @@ Sonic_Display:				; XREF: loc_12C7E
 Obj01_Display:
 		jsr	DisplaySprite
 
+; Second part of the NineKode. Play different music on different acts - after invincibility wears off
+ 
 Obj01_ChkInvin:
 		tst.b	($FFFFFE2D).w	; does Sonic have invincibility?
-		beq.s	Obj01_ChkShoes	; if not, branch
+		beq.w	Obj01_ChkShoes	; if not, branch	; change to beq.w
 		tst.w	$32(a0)		; check	time remaining for invinciblity
-		beq.s	Obj01_ChkShoes	; if no	time remains, branch
+		beq.w	Obj01_ChkShoes	; if no	time remains, branch	; change to beq.w
 		subq.w	#1,$32(a0)	; subtract 1 from time
-		bne.s	Obj01_ChkShoes
+		bne.w	Obj01_ChkShoes	; change to bne.w
 		tst.b	($FFFFF7AA).w
-		bne.s	Obj01_RmvInvin
+		bne.w	Obj01_RmvInvin	; change to bne.w
 		cmpi.w	#$C,($FFFFFE14).w
-		bcs.s	Obj01_RmvInvin
+		bcs.w	Obj01_RmvInvin	; change to bcs.w
 		moveq	#0,d0
 		move.b	($FFFFFE10).w,d0
-		cmpi.w	#$103,($FFFFFE10).w ; check if level is	SBZ3
-		bne.s	Obj01_PlayMusic
-		moveq	#5,d0		; play SBZ music
-
+ 
+		cmpi.b	#$0,($FFFFFE11).w	; is this act 1?
+		bne.s	Obj01_GetBgm2	; if not, branch
+		lea	(MusicList1).l,a1	; load Music Playlist for Acts 1
+		bra.s	Obj01_PlayMusic	; go to PlayMusic
+ 
+Obj01_GetBgm2:
+		cmpi.b	#$1,($FFFFFE11).w	; is this act 2?
+		bne.s	Obj01_GetBgm3	; if not, branch
+		lea	(MusicList2).l,a1	; load Music Playlist for Acts 2
+		bra.s	Obj01_PlayMusic	; go to PlayMusic
+ 
+Obj01_GetBgm3:
+		cmpi.b	#$2,($FFFFFE11).w	; is this act 3?
+		bne.s	Obj01_GetBgm4	; if not, branch
+		lea	(MusicList3).l,a1	; load Music Playlist for Acts 3
+		bra.s	Obj01_PlayMusic	; go to PlayMusic
+ 
+Obj01_GetBgm4:
+		cmpi.b	#$3,($FFFFFE11).w	; is this act 4?
+		bne.s	Obj01_PlayMusic	; if not, branch
+		lea	(MusicList4).l,a1	; load Music Playlist for Acts 4
+ 
 Obj01_PlayMusic:
-		lea	(MusicList2).l,a1
 		move.b	(a1,d0.w),d0
 		jsr	(PlaySound).l	; play normal music
+ 
+; NineKode ends here.
 
 Obj01_RmvInvin:
 		move.b	#0,($FFFFFE2D).w ; cancel invincibility
@@ -25713,14 +25756,40 @@ locret_1408C:
 
 ResumeMusic:				; XREF: Obj64_Wobble; Sonic_Water; Obj0A_ReduceAir
 		cmpi.w	#$C,($FFFFFE14).w
-		bhi.s	loc_140AC
-		move.w	#$82,d0		; play LZ music
-		cmpi.w	#$103,($FFFFFE10).w ; check if level is	0103 (SBZ3)
-		bne.s	loc_140A6
-		move.w	#$86,d0		; play SBZ music
-
+ 
+; Third section of the NineKode - Play correct music after the countdown (if you breathe)
+ 
+		bhi.w	loc_140AC	; change to bhi.w!
+ 
+		cmpi.b	#$0,($FFFFFE11).w	; is this act 1?
+		bne.s	Air_GetBgm2	; if not, branch
+		lea	(MusicList1).l,a1	; load Music Playlist for Acts 1
+		bra.s	Air_PlayMusic	; go to PlayMusic
+ 
+Air_GetBgm2:
+		cmpi.b	#$1,($FFFFFE11).w	; is this act 2?
+		bne.s	Air_GetBgm3	; if not, branch
+		lea	(MusicList2).l,a1	; load Music Playlist for Acts 2
+		bra.s	Air_PlayMusic	; go to PlayMusic
+ 
+Air_GetBgm3:
+		cmpi.b	#$2,($FFFFFE11).w	; is this act 3?
+		bne.s	Air_GetBgm4	; if not, branch
+		lea	(MusicList3).l,a1	; load Music Playlist for Acts 39
+		bra.s	Air_PlayMusic	; go to PlayMusic
+ 
+Air_GetBgm4:
+		cmpi.b	#$3,($FFFFFE11).w	; is this act 4?
+		bne.s	Air_PlayMusic	; if not, branch
+		lea	(MusicList4).l,a1	; load Music Playlist for Acts 4
+ 
+Air_PlayMusic:
+		move.b	1(a1),d0	; load entry $1 from the playlist
+ 
 loc_140A6:
 		jsr	(PlaySound).l
+ 
+; NineKode ends here
 
 loc_140AC:
 		move.w	#$1E,($FFFFFE14).w
@@ -38480,7 +38549,13 @@ MusicIndex:	dc.l Music81, Music82
 		dc.l Music8D, Music8E
 		dc.l Music8F, Music90
 		dc.l Music91, Music92
-		dc.l Music93
+		dc.l Music93, Music94
+		dc.l Music95, Music96
+		dc.l Music97, Music98
+		dc.l Music99, Music9A
+		dc.l Music9B, Music9C
+		dc.l Music9D, Music9E
+		dc.l Music9F
 ; ---------------------------------------------------------------------------
 ; Type of sound	being played ($90 = music; $70 = normal	sound effect)
 ; ---------------------------------------------------------------------------
@@ -40736,43 +40811,67 @@ Kos_Z80:	incbin	sound\z80_1.bin
 		dc.w (((EndOfRom-SegaPCM)&$FF)<<8)+(((EndOfRom-SegaPCM)&$FF00)>>8)
 		incbin	sound\z80_2.bin
 		even
-Music81:	incbin	sound\jahl.bin
+Music81:	incbin	sound\jahl.bin ; 	Green Hill Act 1
 		even
-Music82:	incbin	sound\music82.bin
+Music82:	incbin	sound\music82.bin ; Labyrinth Act 1
 		even
-Music83:	incbin	sound\music83.bin
+Music83:	incbin	sound\music83.bin ; Marble Act 1
 		even
-Music84:	include	sound\music84.asm
+Music84:	include	sound\music84.asm ; Star Light Act 1
 		even
-Music85:	incbin	sound\glass2.bin
+Music85:	incbin	sound\glass2.bin ; Spring Yard Act 1
 		even
-Music86:	incbin	sound\music86.bin
+Music86:	incbin	sound\music86.bin; Scrap Brain Act 1
 		even
-Music87:	include	sound\music87.asm
+Music87:	include	sound\music87.asm; Invincibility
 		even
-Music88:	incbin	sound\music88.bin
+Music88:	incbin	sound\music88.bin; Extra Life
 		even
-Music89:	incbin	sound\music89.bin
+Music89:	incbin	sound\music89.bin; Special Stage
 		even
-Music8A:	incbin	sound\music8A.bin
+Music8A:	incbin	sound\music8A.bin; Title Screen
 		even
-Music8B:	incbin	sound\music8B.bin
+Music8B:	incbin	sound\music8B.bin; Ending Theme
 		even
-Music8C:	incbin	sound\music8C.bin
+Music8C:	incbin	sound\music8C.bin; VS Boss
 		even
-Music8D:	incbin	sound\music8D.bin
+Music8D:	incbin	sound\music8D.bin; Final Zone
 		even
-Music8E:	incbin	sound\fle.bin
+Music8E:	incbin	sound\fle.bin ;		Act Clear
 		even
-Music8F:	incbin	sound\music8F.bin
+Music8F:	incbin	sound\music8F.bin ; Game Over
 		even
-Music90:	incbin	sound\music90.bin
+Music90:	incbin	sound\music90.bin ; Continue
 		even
-Music91:	incbin	sound\music91.bin
+Music91:	incbin	sound\music91.bin ; Credits
 		even
-Music92:	incbin	sound\music92.bin
+Music92:	incbin	sound\music92.bin ; Drowning
 		even
-Music93:	incbin	sound\music93.bin
+Music93:	incbin	sound\music93.bin ; Chaos Emerald
+		even
+Music94:	incbin	sound\music94.bin ; Green Hill Act 2
+		even
+Music95:	incbin	sound\music95.bin ; Green Hill Act 3
+		even
+Music96:	incbin	sound\music96.bin ; Labyrinth Act 2
+		even
+Music97:	incbin	sound\music97.bin ; Labyrinth Act 3
+		even
+Music98:	incbin	sound\music98.bin ; Marble Act 2
+		even
+Music99:	incbin	sound\music99.bin ; Marble Act 3
+		even
+Music9A:	incbin	sound\music9A.bin ; Star Light Act 2
+		even
+Music9B:	incbin	sound\music9B.bin ; Star Light Act 3
+		even
+Music9C:	incbin	sound\music9C.bin ; Spring Yard Act 2
+		even
+Music9D:	incbin	sound\music9D.bin ; Spring Yard Act 3
+		even
+Music9E:	incbin	sound\music9E.bin ; Scrap Brain Act 2
+		even
+Music9F:	incbin	sound\music9F.bin ; Scrap Brain Act 3
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers
