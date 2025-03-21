@@ -40701,7 +40701,7 @@ Kos_Z80:	incbin	sound\z80_1.bin
 		dc.w (((EndOfRom-SegaPCM)&$FF)<<8)+(((EndOfRom-SegaPCM)&$FF00)>>8)
 		incbin	sound\z80_2.bin
 		even
-Music81:	incbin	sound\music81.bin
+Music81:	incbin	sound\jahl.bin
 		even
 Music82:	incbin	sound\music82.bin
 		even
