@@ -1,3 +1,4 @@
+SONIC 1 GITHUB MADNESS 3 REPO HIVEBRAIN 2005 DISASSEMBLY
 ========================================================================================
  Sonic the Hedgehog (W) (REV00) [!].bin - June 2005 Disassembly (ASM68K)
 ========================================================================================
@@ -21,3 +22,5 @@ Disassembly by Hivebrain.
 Thanks: drx, Korama, Lightning, Magus, Nemesis, Stealth
 ----------------------------------------------------------------------------------------
 Remember - always make backups of your ASM files!
+
+THERES SUCH A STREAK IN MY SEAT!
