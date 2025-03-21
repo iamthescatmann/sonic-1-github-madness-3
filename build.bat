@@ -1,5 +1,5 @@
 @echo off
-echo Please restore the old code before building, you might break the disassembly
+echo Please restore the old code before building (especially the .asm files), you might break the disassembly
 echo Press anything to continue
 pause>nul
 cls
