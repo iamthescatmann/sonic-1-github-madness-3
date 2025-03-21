@@ -24,3 +24,4 @@ Thanks: drx, Korama, Lightning, Magus, Nemesis, Stealth
 Remember - always make backups of your ASM files, or the batch file will tell you!
 
 THERES SUCH A STREAK IN MY SEAT!
+a
