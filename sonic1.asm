@@ -6004,7 +6004,7 @@ Obj89_Move:				; XREF: Obj89_Index
 		cmpi.w	#$C0,8(a0)	; has object reached $C0?
 		beq.s	Obj89_Delay	; if yes, branch
 		addi.w	#$10,8(a0)	; move object to the right
-		bra.w	DisplaySprite
+		jsr	DisplaySprite
 ; ===========================================================================
 
 Obj89_Delay:				; XREF: Obj89_Move
@@ -6017,7 +6017,7 @@ Obj89_GotoCredits:			; XREF: Obj89_Index
 		move.b	#$1C,($FFFFF600).w ; exit to credits
 
 Obj89_Display:
-		bra.w	DisplaySprite
+		jsr	DisplaySprite
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - Sonic on the ending	sequence
@@ -6859,103 +6859,189 @@ loc_6426:
 Deform_SLZ:				; XREF: Deform_Index
 		move.w	($FFFFF73A).w,d4
 		ext.l	d4
-		asl.l	#7,d4
-		move.w	($FFFFF73C).w,d5
-		ext.l	d5
-		asl.l	#7,d5
-		bsr.w	ScrollBlock2
-		move.w	($FFFFF70C).w,($FFFFF618).w
-		bsr.w	Deform_SLZ_2
-		lea	($FFFFA800).w,a2
-		move.w	($FFFFF70C).w,d0
-		move.w	d0,d2
-		subi.w	#$C0,d0
-		andi.w	#$3F0,d0
-		lsr.w	#3,d0
-		lea	(a2,d0.w),a2
+		asl.l	#5,d4
+		move.l	d4,d1
+		asl.l	#1,d4
+		add.l	d1,d4
+		moveq	#0,d5
+		bsr.w	ScrollBlock1
+		bsr.w	ScrollBlock3
 		lea	($FFFFCC00).w,a1
-		move.w	#$E,d1
-		move.w	($FFFFF700).w,d0
+	;	move.w	($FFFFF704).w,d0
+	;	andi.w	#$7FF,d0
+		lsr.w	#5,d0
 		neg.w	d0
-		swap	d0
-		andi.w	#$F,d2
-		add.w	d2,d2
-		move.w	(a2)+,d0
-		jmp	loc_6482(pc,d2.w)
-; ===========================================================================
+		addi.w	#$26,d0
+		move.w	d0,($FFFFF714).w
+		move.w	d0,d4
+	;	bsr.w	ScrollBlock3
+        move.w #-$6,($FFFFF70C).w ; lock the background vertically in place
+		lea	($FFFFCC00).w,a1	; load beginning address of horizontal scroll buffer to a1
 
-loc_6480:				; XREF: Deform_SLZ
-		move.w	(a2)+,d0
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		lea	($FFFFA800).w,a2
+		addi.l	#$5000,(a2)+
+		addi.l	#$C000,(a2)+
+		move.w	($FFFFA800).w,d0
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#1,d0			; divide by 2 (Slow down the scroll position)
+		move.w	#20-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_1:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_1	; repeat d1 number of scanlines
 
-loc_6482:
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		move.l	d0,(a1)+
-		dbf	d1,loc_6480
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		lea	($FFFFA800).w,a2
+		addi.l	#$5000,(a2)+
+		addi.l	#$C000,(a2)+
+		move.w	($FFFFA800).w,d0
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
+		move.w	#27-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_2:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_2	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		lea	($FFFFA800).w,a2
+		addi.l	#$5000,(a2)+
+		addi.l	#$C000,(a2)+
+		move.w	($FFFFA800).w,d0
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
+		move.w	#18-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_3:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_3	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		lea	($FFFFA800).w,a2
+		addi.l	#$5000,(a2)+
+		addi.l	#$C000,(a2)+
+		move.w	($FFFFA800).w,d0
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
+		move.w	#10-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_4:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_4	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		lea	($FFFFA800).w,a2
+		addi.l	#$5000,(a2)+
+		addi.l	#$C000,(a2)+
+		move.w	($FFFFA800).w,d0
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#4,d0			; divide by 16 (Slow down the scroll position)
+		move.w	#16-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_5:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_5	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#5,d0			; divide by 32 (Slow down the scroll position)
+		move.w	#29-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_6:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_6	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#7,d0			; divide by 128 (Slow down the scroll position)
+		move.w	#6-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_7:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_7	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#6,d0			; divide by 64 (Slow down the scroll position)
+		move.w	#5-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_8:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_8	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#5,d0			; divide by 32 (Slow down the scroll position)
+		move.w	#8-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_9:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_9	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#4,d0			; divide by 16 (Slow down the scroll position)
+		move.w	#7-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_10:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_10	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
+		move.w	#20-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_11:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_11	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
+		move.w	#20-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_12:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_12	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#1,d0			; divide by 2 (Slow down the scroll position)
+		move.w	#50-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+slz_DeformLoop_13:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,slz_DeformLoop_13	; repeat d1 number of scanlines
 		rts	
 ; End of function Deform_SLZ
-
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-Deform_SLZ_2:				; XREF: Deform_SLZ
-		lea	($FFFFA800).w,a1
-		move.w	($FFFFF700).w,d2
-		neg.w	d2
-		move.w	d2,d0
-		asr.w	#3,d0
-		sub.w	d2,d0
-		ext.l	d0
-		asl.l	#4,d0
-		divs.w	#$1C,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		move.w	#$1B,d1
-
-loc_64CE:
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,loc_64CE
-		move.w	d2,d0
-		asr.w	#3,d0
-		move.w	#4,d1
-
-loc_64E2:
-		move.w	d0,(a1)+
-		dbf	d1,loc_64E2
-		move.w	d2,d0
-		asr.w	#2,d0
-		move.w	#4,d1
-
-loc_64F0:
-		move.w	d0,(a1)+
-		dbf	d1,loc_64F0
-		move.w	d2,d0
-		asr.w	#1,d0
-		move.w	#$1D,d1
-
-loc_64FE:
-		move.w	d0,(a1)+
-		dbf	d1,loc_64FE
 		rts	
 ; End of function Deform_SLZ_2
 
@@ -40572,7 +40658,7 @@ Music82:	incbin	sound\music82.bin
 		even
 Music83:	incbin	sound\music83.bin
 		even
-Music84:	incbin	sound\music84.bin
+Music84:	include	sound\music84.asm
 		even
 Music85:	incbin	sound\music85.bin
 		even
