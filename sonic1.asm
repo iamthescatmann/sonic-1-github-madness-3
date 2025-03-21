@@ -40713,7 +40713,7 @@ Music85:	incbin	sound\glass2.bin
 		even
 Music86:	incbin	sound\music86.bin
 		even
-Music87:	incbin	sound\music87.bin
+Music87:	include	sound\music87.asm
 		even
 Music88:	incbin	sound\music88.bin
 		even
