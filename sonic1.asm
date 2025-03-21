@@ -427,7 +427,7 @@ ErrorWaitForC:				; XREF: loc_478
 ; ===========================================================================
 
 Art_Text:	incbin	artunc\menutext.bin	; text used in level select and debug mode
-		even
+Art_Text_end:		even
 
 ; ===========================================================================
 
@@ -3179,10 +3179,10 @@ Title_ClrPallet:
 		lea	($C00000).l,a6
 		move.l	#$50000003,4(a6)
 		lea	(Art_Text).l,a5
-		move.w	#$28F,d1
+		move.w	#(Art_Text_end-Art_Text/4)-1,d1
 
 Title_LoadText:
-		move.w	(a5)+,(a6)
+		move.l	(a5)+,(a6)
 		dbf	d1,Title_LoadText ; load uncompressed text patterns
 
 		move.b	#0,($FFFFFE30).w ; clear lamppost counter
@@ -3353,6 +3353,13 @@ Title_ClrVram:
 		dbf	d1,Title_ClrVram ; fill	VRAM with 0
 
 		bsr.w	LevSelTextLoad
+		
+		; sound test fix
+		move.w	($FFFFFF82).w,d6
+		move.w	#$14,($FFFFFF82).w
+		move.w	#$E680-$21,d3
+		bsr.w	LevSelSndTest	; refresh text
+		move.w	d6,($FFFFFF82).w
 
 ; ---------------------------------------------------------------------------
 ; Level	Select
@@ -3368,24 +3375,18 @@ LevelSelect:
 		andi.b	#$F0,($FFFFF605).w ; is	A, B, C, or Start pressed?
 		beq.s	LevelSelect	; if not, branch
 		move.w	($FFFFFF82).w,d0
+		cmpi.w	#$15,d0		; have you selected item $15 (free wifi)?
+		bne.s	@dontboom	; if not, dont blow this place up
+		move.w	#$E4,d0
+		bsr.w	PlaySound_Special
+		jmp		CheckSumError; BOOM
+	@dontboom:
 		cmpi.w	#$14,d0		; have you selected item $14 (sound test)?
 		bne.s	LevSel_Level_SS	; if not, go to	Level/SS subroutine
+		
 		move.w	($FFFFFF84).w,d0
 		addi.w	#$80,d0
-		tst.b	($FFFFFFE3).w	; is Japanese Credits cheat on?
-		beq.s	LevSel_NoCheat	; if not, branch
-		cmpi.w	#$9F,d0		; is sound $9F being played?
-		beq.s	LevSel_Ending	; if yes, branch
-		cmpi.w	#$9E,d0		; is sound $9E being played?
-		beq.s	LevSel_Credits	; if yes, branch
-
-LevSel_NoCheat:
-		cmpi.w	#$94,d0		; is sound $80-$94 being played?
-		bcs.s	LevSel_PlaySnd	; if yes, branch
-		cmpi.w	#$A0,d0		; is sound $95-$A0 being played?
-		bcs.s	LevelSelect	; if yes, branch
-
-LevSel_PlaySnd:
+		
 		bsr.w	PlaySound_Special
 		bra.s	LevelSelect
 ; ===========================================================================
@@ -3544,22 +3545,25 @@ LevSel_UpDown:
 		beq.s	LevSel_Down	; if not, branch
 		subq.w	#1,d0		; move up 1 selection
 		bcc.s	LevSel_Down
-		moveq	#$14,d0		; if selection moves below 0, jump to selection	$14
+		moveq	#$16,d0		; if selection moves below 0, jump to selection	$15
 
 LevSel_Down:
 		btst	#1,d1		; is down pressed?
 		beq.s	LevSel_Refresh	; if not, branch
 		addq.w	#1,d0		; move down 1 selection
-		cmpi.w	#$15,d0
+		cmpi.w	#$17,d0
 		bcs.s	LevSel_Refresh
 		moveq	#0,d0		; if selection moves above $14,	jump to	selection 0
-
-LevSel_Refresh:
-		move.w	d0,($FFFFFF82).w ; set new selection
-		bsr.w	LevSelTextLoad	; refresh text
-		rts	
 ; ===========================================================================
-
+LevSel_Refresh:
+		move.w	d0,d6
+		move.w	#$E680-$21,d3	; VRAM setting
+		bsr.w	LevSelHighlightCode	; refresh text
+		move.w	#$C680-$21,d3
+		move.w	d6,($FFFFFF82).w ; set new selection
+		bsr.w	LevSelHighlightCode	; refresh text
+		rts	
+		
 LevSel_SndTest:				; XREF: LevSelControls
 		cmpi.w	#$14,($FFFFFF82).w ; is	item $14 selected?
 		bne.s	LevSel_NoMove	; if not, branch
@@ -3582,8 +3586,9 @@ LevSel_Right:
 		moveq	#0,d0		; if sound test	moves above $4F, set to	0
 
 LevSel_Refresh2:
+		move.w	#$C680-$21,d3
 		move.w	d0,($FFFFFF84).w ; set sound test number
-		bsr.w	LevSelTextLoad	; refresh text
+		bra.w	LevSelSndTest	; refresh text
 
 LevSel_NoMove:
 		rts	
@@ -3594,43 +3599,59 @@ LevSel_NoMove:
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-LevSelTextLoad:				; XREF: TitleScreen
-		lea	(LevelMenuText).l,a1
-		lea	($C00000).l,a6
-		move.l	#$62100003,d4	; screen position (text)
-		move.w	#$E680,d3	; VRAM setting
-		moveq	#$14,d1		; number of lines of text
-
-loc_34FE:				; XREF: LevSelTextLoad+26j
+lsscrpos = $62040003
+lsoff = $240000
+lsstpos = $663E0003
+LevSelTextLoad_loop:
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine
 		addi.l	#$800000,d4
-		dbf	d1,loc_34FE
+		dbf.w	d1,LevSelTextLoad_loop
+		rts
+LevSelTextLoad:				; XREF: TitleScreen
+		lea	(LevelMenuText).l,a1
+		lea	($C00000).l,a6
+		move.w	#$E680-$21,d3	; VRAM setting
+		move.l	#lsscrpos,d4	; screen position (text)
+		
+		move.w	#11,d1		; number of lines of text (first row)
+		bsr.s	LevSelTextLoad_loop
+		
+		
+		move.l	#lsscrpos+lsoff,d4
+		move.w	#12,d1		; number of lines of text (second row)
+		bsr.s	LevSelTextLoad_loop
+		move.w	#$C680-$21,d3
+		
+LevSelHighlightCode:
+		lea	($C00000).l,a6
 		moveq	#0,d0
 		move.w	($FFFFFF82).w,d0
 		move.w	d0,d1
-		move.l	#$62100003,d4
+		move.l	#lsscrpos,d4
+		
+		cmpi.w	#12,d0
+		blt.s	@notsecond
+		
+		sub.w	#12,d0
+		addi.l	#lsoff,d4
+	@notsecond:
 		lsl.w	#7,d0
 		swap	d0
 		add.l	d0,d4
 		lea	(LevelMenuText).l,a1
 		lsl.w	#3,d1
-		move.w	d1,d0
 		add.w	d1,d1
-		add.w	d0,d1
 		adda.w	d1,a1
-		move.w	#$C680,d3
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine
-		move.w	#$E680,d3
 		cmpi.w	#$14,($FFFFFF82).w
-		bne.s	loc_3550
-		move.w	#$C680,d3
+		beq.s	LevSelSndTest
+		rts
 
-loc_3550:
-		move.l	#$6C300003,($C00004).l ; screen	position (sound	test)
+LevSelSndTest:
+		add.w	#$30,d3
+		move.l	#lsstpos,($C00004).l ; screen	position (sound	test)
 		move.w	($FFFFFF84).w,d0
 		addi.w	#$80,d0
 		move.b	d0,d2
@@ -3662,30 +3683,55 @@ loc_3580:
 
 
 LevSel_ChgLine:				; XREF: LevSelTextLoad
-		moveq	#$17,d2		; number of characters per line
+		moveq	#$10-1,d2		; number of characters per line
 
-loc_3588:
+@loop:
 		moveq	#0,d0
 		move.b	(a1)+,d0
-		bpl.s	loc_3598
+		cmpi.b	#$20,d0
+		bgt.s	@draw
 		move.w	#0,(a6)
-		dbf	d2,loc_3588
+		dbf	d2,@loop
 		rts	
 ; ===========================================================================
 
-loc_3598:				; XREF: LevSel_ChgLine
+@draw:				; XREF: LevSel_ChgLine
 		add.w	d3,d0
 		move.w	d0,(a6)
-		dbf	d2,loc_3588
+		dbf	d2,@loop
 		rts	
 ; End of function LevSel_ChgLine
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Level	select menu text
+; Level	select menu text ( this stupid level select code was brought to you by the meltdown guy )
 ; ---------------------------------------------------------------------------
-LevelMenuText:	incbin	misc\menutext.bin
-		even
+LevelMenuText:	
+		dc.b    "CRUNCHYROLL    1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "LABYRINTH      1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "MARBLE ZONE    1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "STAR LIGHT     1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "SPRING YARD    1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "SCRAP BRAIN    1"
+        dc.b    "               2"
+        dc.b    "               3"
+        dc.b    "FINAL ZONE      "
+        dc.b    "SPECIAL STAGE   "
+        dc.b    "SOUND TEST      "
+		dc.b	"FREE WIFI       "
+		dc.b	"OPTIONS LATER   "
+		dc.b	"CANT TOUCH ME XD"
+        even
 ; ---------------------------------------------------------------------------
 ; Music	playlist
 ; ---------------------------------------------------------------------------
