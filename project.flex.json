@@ -1,8 +1,68 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "3b933959-6263-4958-b487-ca0d225026da",
+    "node": "08e97ad6-cedc-4ec9-a161-818e0a4f8fe4",
     "objects": [
+        {
+            "format": "Sonic 1.js",
+            "name": "buzz bomber",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\buzzbomb.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\obj22.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "08e97ad6-cedc-4ec9-a161-818e0a4f8fe4"
+        },
+        {
+            "format": "Sonic 1.js",
+            "name": "plap brain egg",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\sbz2boss.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\obj82.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "404b25bd-b064-4bd9-92a0-0a84f3a7f277"
+        },
+        {
+            "format": "Sonic 1.js",
+            "name": "robotonic",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\bossmain.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Eggman.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "5a404b25-bdb0-44cb-9912-a00a84f3a7f2"
+        },
         {
             "format": "Sonic 1.js",
             "name": "sonic",
