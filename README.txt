@@ -21,3 +21,5 @@ Disassembly by Hivebrain.
 Thanks: drx, Korama, Lightning, Magus, Nemesis, Stealth
 ----------------------------------------------------------------------------------------
 Remember - always make backups of your ASM files!
+
+THERES SUCH A STREAK IN MY SEAT!
