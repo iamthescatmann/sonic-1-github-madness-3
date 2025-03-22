@@ -12785,8 +12785,7 @@ Obj26_BreakOpen:			; XREF: Obj26_Index
 
 Obj26_Explode:
 		bsr.w	SingleObjLoad
-		; bne.s	Obj26_SetBroken
-		bne.s	Obj26_NextExplosion	; GMZ
+		bne.s	Obj26_SetBroken
 		move.b	#$27,0(a1)	; GMZ: Load explosion object
 		addq.b	#2,$24(a1)
 		move.b	d2,$28(a1)	; GMZ: Set subtype
@@ -35020,11 +35019,12 @@ TouchKE_Explode:
 TouchKE_NextExplosion:
 		addq.b	#4,d2
 		jsr	SingleObjLoad
-		bne.s	TouchKE_NextExplosion
+		bne.s	TouchKE_NoExplosion
 		move.w	8(a2),8(a1)
 		move.w	$C(a2),$C(a1)
 		dbf	d1,TouchKE_Explode
 
+TouchKE_NoExplosion:
 		move.l	a2,a1	; GMZ: Restore original a1 address
 		tst.w	$12(a0)
 		bmi.s	loc_1AFC2
