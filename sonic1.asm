@@ -11081,22 +11081,46 @@ Obj27_Main:				; XREF: Obj27_Index
 		move.b	#1,$18(a0)
 		move.b	#0,$20(a0)
 		move.b	#$C,$19(a0)
-		move.b	#7,$1E(a0)	; set frame duration to	7 frames
+		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
+		move.b	#$E,$1E(a0)	; GMZ
 		move.b	#0,$1A(a0)
 		move.w	#$C1,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
 
+		lea	(Obj27_ExplosionXYSpd).l,a2	; GMZ: Get Explosion X/Y Speeds according to subtype
+		move.b	$28(a0),d0
+		move.w	(a2,d0.w),$10(a0)
+		move.w	2(a2,d0.w),$12(a0)
+
 Obj27_Animate:				; XREF: Obj27_Index
 		subq.b	#1,$1E(a0)	; subtract 1 from frame	duration
 		bpl.s	Obj27_Display
-		move.b	#7,$1E(a0)	; set frame duration to	7 frames
+		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
+		move.b	#$E,$1E(a0)	; GMZ
 		addq.b	#1,$1A(a0)	; next frame
 		cmpi.b	#5,$1A(a0)	; is the final frame (05) displayed?
 		beq.w	DeleteObject	; if yes, branch
 
 Obj27_Display:
+		jsr	SpeedToPos	; GMZ
+		addi.w	#$38,$12(a0)	; GMZ: Explosion Gravity
 		bra.w	DisplaySprite
 ; ===========================================================================
+; ---------------------------------------------------------------------------
+Obj27_ExplosionXYSpd:
+		; dc.w	-$350, -$300	; Left
+		; dc.w	-$200, -$450	; Near middle (left)
+		; dc.w	0, -$500	; Middle
+		; dc.w	$200, -$450	; Near middle (right)
+		; dc.w	$350, -$300	; Right
+
+		dc.w	-$150, -$400	; Left
+		dc.w	-$100, -$550	; Near middle (left)
+		dc.w	0, -$600	; Middle
+		dc.w	$100, -$550	; Near middle (right)
+		dc.w	$150, -$400	; Right
+
+		dc.b	"hi hello hru -garblemarden"
 ; ---------------------------------------------------------------------------
 ; Object 3F - explosion	from a destroyed boss, bomb or cannonball
 ; ---------------------------------------------------------------------------
@@ -12678,14 +12702,22 @@ Obj26_BreakOpen:			; XREF: Obj26_Index
 		move.w	8(a0),8(a1)
 		move.w	$C(a0),$C(a1)
 		move.b	$1C(a0),$1C(a1)
+		moveq	#0,d2	; GMZ
+		moveq	#5,d1	; GMZ: Amount of explosion objects
 
 Obj26_Explode:
 		bsr.w	SingleObjLoad
-		bne.s	Obj26_SetBroken
-		move.b	#$27,0(a1)	; load explosion object
+		; bne.s	Obj26_SetBroken
+		bne.s	Obj26_NextExplosion	; GMZ
+		move.b	#$27,0(a1)	; GMZ: Load explosion object
 		addq.b	#2,$24(a1)
+		move.b	d2,$28(a1)	; GMZ: Set subtype
 		move.w	8(a0),8(a1)
 		move.w	$C(a0),$C(a1)
+
+Obj26_NextExplosion:
+		addq.b	#4,d2
+		dbf	d1,Obj26_Explode
 
 Obj26_SetBroken:
 		lea	($FFFFFC00).w,a2
@@ -34898,8 +34930,24 @@ loc_1AF82:
 
 loc_1AF9C:
 		bsr.w	AddPoints
+		moveq	#0,d2	; GMZ
+		moveq	#5,d1	; GMZ: Amount of explosion objects
+		move.l	a1,a2	; GMZ: Save a1 address on a2
+
+TouchKE_Explode:
 		move.b	#$27,0(a1)	; change object	to points
 		move.b	#0,$24(a1)
+		move.b	d2,$28(a1)	; GMZ: Set subtype
+
+TouchKE_NextExplosion:
+		addq.b	#4,d2
+		jsr	SingleObjLoad
+		bne.s	TouchKE_NextExplosion
+		move.w	8(a2),8(a1)
+		move.w	$C(a2),$C(a1)
+		dbf	d1,TouchKE_Explode
+
+		move.l	a2,a1	; GMZ: Restore original a1 address
 		tst.w	$12(a0)
 		bmi.s	loc_1AFC2
 		move.w	$C(a0),d0
