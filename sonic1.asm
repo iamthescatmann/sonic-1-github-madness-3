@@ -3564,23 +3564,36 @@ LevSel_UpDown:
 		move.b	($FFFFF604).w,d1
 		andi.b	#3,d1		; is up/down pressed?
 		beq.s	LevSel_SndTest	; if not, branch
-		move.w	($FFFFFF82).w,d0
+		move.w	($FFFFFF82).w,d6
 		btst	#0,d1		; is up	pressed?
 		beq.s	LevSel_Down	; if not, branch
-		subq.w	#1,d0		; move up 1 selection
+		subq.w	#1,d6		; move up 1 selection
 		bcc.s	LevSel_Down
-		moveq	#$16,d0		; if selection moves below 0, jump to selection	$15
+		moveq	#$16,d6		; if selection moves below 0, jump to selection	$15
 
 LevSel_Down:
 		btst	#1,d1		; is down pressed?
 		beq.s	LevSel_Refresh	; if not, branch
-		addq.w	#1,d0		; move down 1 selection
-		cmpi.w	#$17,d0
+		addq.w	#1,d6		; move down 1 selection
+		cmpi.w	#$17,d6
 		bcs.s	LevSel_Refresh
-		moveq	#0,d0		; if selection moves above $14,	jump to	selection 0
+		moveq	#0,d6		; if selection moves above $14,	jump to	selection 0
+		bra.s	LevSel_Refresh
+		
+LevSel_GoLR:
+		btst	#2,d1		; is left pressed?
+		beq.s	LevSel_GoRight	; if not, branch
+		sub.w	#12,d6
+		bcc.s	LevSel_Down
+		add.w	#12,d6	; don't jump
+		bra.s	LevSel_Refresh
+LevSel_GoRight:
+		add.w	#12,d6
+		cmpi.w	#$17,d6
+		bcs.s	LevSel_Refresh
+		sub.w	#12,d6	; don't jump
 ; ===========================================================================
 LevSel_Refresh:
-		move.w	d0,d6
 		move.w	#$E680-$21,d3	; VRAM setting
 		bsr.w	LevSelHighlightCode	; refresh text
 		move.w	#$C680-$21,d3
@@ -3589,11 +3602,12 @@ LevSel_Refresh:
 		rts	
 		
 LevSel_SndTest:				; XREF: LevSelControls
-		cmpi.w	#$14,($FFFFFF82).w ; is	item $14 selected?
-		bne.s	LevSel_NoMove	; if not, branch
 		move.b	($FFFFF605).w,d1
 		andi.b	#$C,d1		; is left/right	pressed?
 		beq.s	LevSel_NoMove	; if not, branch
+		cmpi.w	#$14,($FFFFFF82).w ; is	item $14 selected?
+		bne.s	LevSel_GoLR	; if not, branch
+		
 		move.w	($FFFFFF84).w,d0
 		btst	#2,d1		; is left pressed?
 		beq.s	LevSel_Right	; if not, branch
@@ -3643,7 +3657,7 @@ LevSelTextLoad:				; XREF: TitleScreen
 		
 		
 		move.l	#lsscrpos+lsoff,d4
-		move.w	#12,d1		; number of lines of text (second row)
+		move.w	#11,d1		; number of lines of text (second row)
 		bsr.s	LevSelTextLoad_loop
 		move.w	#$C680-$21,d3
 		
@@ -3725,6 +3739,21 @@ LevSel_ChgLine:				; XREF: LevSelTextLoad
 		dbf	d2,@loop
 		rts	
 ; End of function LevSel_ChgLine
+		
+CStringSlop_draw:
+		add.w	d3,d0
+		move.w	d0,(a6)
+CStringSlop:				; XREF: LevSelTextLoad
+		moveq	#0,d0
+		move.b	(a1)+,d0
+		cmpi.b	#$20,d0
+		bgt.s	CStringSlop_draw
+		beq.s	@end
+		move.w	#0,(a6)
+		bra.s	CStringSlop
+	@end:
+		rts
+; End of function LevSel_ChgLine
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -3756,6 +3785,10 @@ LevelMenuText:
 		dc.b	"OPTIONS LATER   "
 		dc.b	"CANT TOUCH ME XD"
         even
+		
+; TODO
+Now_Playing:
+		dc.b	"NOW PLAYING TRACK ",0
 ; ---------------------------------------------------------------------------
 ; Music	playlist
 ; ---------------------------------------------------------------------------
