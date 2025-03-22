@@ -3387,7 +3387,7 @@ YouAreAnIdiot:
 		bsr.w	PalLoad2	; load Sega logo pallet
 		
 		move.w	#$E5,d0		; YOU ARE AN IDIOT BOOM
-		bsr.w	PlaySound_Special
+		move.b	d0,($FFFFF00B).w ; PlaySound_Special but faster
 	@wait:
 		move.b	#4,($FFFFF62A).w
 		bsr.w	DelayProgram
@@ -3402,16 +3402,17 @@ LevelSelect:
 		andi.b	#$F0,($FFFFF605).w ; is	A, B, C, or Start pressed?
 		beq.s	LevelSelect	; if not, branch
 		move.w	($FFFFFF82).w,d0
-		cmpi.w	#$15,d0		; have you selected item $15 (free wifi)?
+		cmpi.w	#lswifi,d0		; have you selected item $15 (free wifi)?
 		beq.w	YouAreAnIdiot	; if not, dont blow this place up
 		
-		cmpi.w	#$14,d0		; have you selected item $14 (sound test)?
+		cmpi.w	#lssndtest,d0		; have you selected item $14 (sound test)?
 		bne.s	LevSel_Level_SS	; if not, go to	Level/SS subroutine
 		
 		move.w	($FFFFFF84).w,d0
 		addi.w	#$80,d0
+		move.b	d0,($FFFFF00B).w ; PlaySound_Special but faster
 		
-		bsr.w	PlaySound_Special
+		jsr		ShowNow_Playing
 		bra.s	LevelSelect
 ; ===========================================================================
 
@@ -3569,29 +3570,29 @@ LevSel_UpDown:
 		beq.s	LevSel_Down	; if not, branch
 		subq.w	#1,d6		; move up 1 selection
 		bcc.s	LevSel_Down
-		moveq	#$16,d6		; if selection moves below 0, jump to selection	$15
+		moveq	#lsselectable,d6		; if selection moves below 0, jump to last selection
 
 LevSel_Down:
 		btst	#1,d1		; is down pressed?
 		beq.s	LevSel_Refresh	; if not, branch
 		addq.w	#1,d6		; move down 1 selection
-		cmpi.w	#$17,d6
+		cmpi.w	#lsselectable+1,d6
 		bcs.s	LevSel_Refresh
-		moveq	#0,d6		; if selection moves above $14,	jump to	selection 0
+		moveq	#0,d6		; if selection moves above last selectable,	jump to	selection 0
 		bra.s	LevSel_Refresh
 		
 LevSel_GoLR:
 		btst	#2,d1		; is left pressed?
 		beq.s	LevSel_GoRight	; if not, branch
-		sub.w	#12,d6
+		sub.w	#lsrow2size,d6
 		bcc.s	LevSel_Down
-		add.w	#12,d6	; don't jump
+		add.w	#lsrow2size,d6	; don't jump
 		bra.s	LevSel_Refresh
 LevSel_GoRight:
-		add.w	#12,d6
-		cmpi.w	#$17,d6
+		add.w	#lsrow1size,d6
+		cmpi.w	#lsselectable+1,d6
 		bcs.s	LevSel_Refresh
-		sub.w	#12,d6	; don't jump
+		sub.w	#lsrow1size,d6	; don't jump
 ; ===========================================================================
 LevSel_Refresh:
 		move.w	#$E680-$21,d3	; VRAM setting
@@ -3605,7 +3606,7 @@ LevSel_SndTest:				; XREF: LevSelControls
 		move.b	($FFFFF605).w,d1
 		andi.b	#$C,d1		; is left/right	pressed?
 		beq.s	LevSel_NoMove	; if not, branch
-		cmpi.w	#$14,($FFFFFF82).w ; is	item $14 selected?
+		cmpi.w	#lssndtest,($FFFFFF82).w ; is	item $14 selected?
 		bne.s	LevSel_GoLR	; if not, branch
 		
 		move.w	($FFFFFF84).w,d0
@@ -3637,9 +3638,10 @@ LevSel_NoMove:
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-lsscrpos = $62040003
+lsscrpos = $60860003
 lsoff = $240000
-lsstpos = $663E0003
+lsstpos = lsscrpos+$43A0000
+
 LevSelTextLoad_loop:
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine
@@ -3652,12 +3654,12 @@ LevSelTextLoad:				; XREF: TitleScreen
 		move.w	#$E680-$21,d3	; VRAM setting
 		move.l	#lsscrpos,d4	; screen position (text)
 		
-		move.w	#11,d1		; number of lines of text (first row)
+		move.w	#lsrow1size-1,d1		; number of lines of text (first row)
 		bsr.s	LevSelTextLoad_loop
 		
 		
 		move.l	#lsscrpos+lsoff,d4
-		move.w	#11,d1		; number of lines of text (second row)
+		move.w	#lsrow2size-1,d1		; number of lines of text (second row)
 		bsr.s	LevSelTextLoad_loop
 		move.w	#$C680-$21,d3
 		
@@ -3668,10 +3670,10 @@ LevSelHighlightCode:
 		move.w	d0,d1
 		move.l	#lsscrpos,d4
 		
-		cmpi.w	#12,d0
+		cmpi.w	#lsrow1size,d0
 		blt.s	@notsecond
 		
-		sub.w	#12,d0
+		sub.w	#lsrow1size,d0
 		addi.l	#lsoff,d4
 	@notsecond:
 		lsl.w	#7,d0
@@ -3683,7 +3685,7 @@ LevSelHighlightCode:
 		adda.w	d1,a1
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine
-		cmpi.w	#$14,($FFFFFF82).w
+		cmpi.w	#lssndtest,($FFFFFF82).w
 		beq.s	LevSelSndTest
 		rts
 
@@ -3748,6 +3750,7 @@ CStringSlop:				; XREF: LevSelTextLoad
 		move.b	(a1)+,d0
 		cmpi.b	#$20,d0
 		bgt.s	CStringSlop_draw
+		tst.b	d0
 		beq.s	@end
 		move.w	#0,(a6)
 		bra.s	CStringSlop
@@ -3772,6 +3775,7 @@ LevelMenuText:
         dc.b    "DONT GET RID   1"
         dc.b    " OF THIS!!     2"
         dc.b    "               3"
+LMTSecondRow:
         dc.b    "THE PIG FROM   1"
         dc.b    " BARNEY        2"
         dc.b    "               3"
@@ -3783,12 +3787,53 @@ LevelMenuText:
         dc.b    "SOUND TEST      "
 		dc.b	"FREE WIFI       "
 		dc.b	"OPTIONS LATER   "
+LMTSelectableEnd:
 		dc.b	"CANT TOUCH ME XD"
-        even
-		
-; TODO
+LMTEnd:
+
+
+lsrow1size = (LMTSecondRow-LevelMenuText)/16
+lsrow2size = (LMTEnd-LMTSecondRow)/16
+lsselectable = ((LMTSelectableEnd-LevelMenuText)/16)-1
+; just to not break these
+lssndtest = lsrow2size+8
+lswifi = lsrow2size+9
+
+nppos = $6C820003
 Now_Playing:
-		dc.b	"NOW PLAYING TRACK ",0
+		dc.b	">>>NOW PLAYING ",0
+		even
+NP_Track:
+		dc.b	"TRACK $",0
+		even
+NP_SFX:
+		dc.b	"SOUND $",0
+		even
+
+ShowNow_Playing:
+		move.b	d0,d6
+		move.w	#$C680-$21,d3	; VRAM setting
+		lea	Now_Playing(pc),a1
+		lea		($C00000).l,a6
+		move.l	#nppos,4(a6)
+		bsr.w	CStringSlop
+		
+		lea	NP_Track(pc),a1
+		cmpi.b	#$A0,d6
+		blt.s	@track
+		
+		lea	NP_SFX(pc),a1
+	@track:
+		bsr.w	CStringSlop
+		
+		add.w	#$30,d3
+		move.b	d6,d0
+		move.b	d0,d2
+		lsr.b	#4,d0
+		bsr.w	LevSel_ChgSnd
+		move.b	d2,d0
+		bsr.w	LevSel_ChgSnd
+		rts	
 ; ---------------------------------------------------------------------------
 ; Music	playlist
 ; ---------------------------------------------------------------------------
