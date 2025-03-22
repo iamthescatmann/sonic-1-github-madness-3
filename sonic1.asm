@@ -430,7 +430,7 @@ Art_Text:	incbin	artunc\menutext.bin	; text used in level select and debug mode
 Art_Text_end:		even
 
 ; ===========================================================================
-
+;VBlank
 loc_B10:				; XREF: Vectors
 		movem.l	d0-a6,-(sp)
 		tst.b	($FFFFF62A).w
@@ -2878,6 +2878,7 @@ Pal_SBZ3SonWat:	incbin	pallet\son_sbzu.bin	; Sonic (underwater in SBZ act 3) pal
 Pal_SpeResult:	incbin	pallet\ssresult.bin	; special stage results screen pallets
 Pal_SpeContinue:incbin	pallet\sscontin.bin	; special stage results screen continue pallet
 Pal_Ending:	incbin	pallet\ending.bin	; ending sequence pallets
+Pal_Idiot:	incbin	pallet\idiot.bin	; idiot pallet
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	delay the program by ($FFFFF62A) frames
@@ -3360,11 +3361,37 @@ Title_ClrVram:
 		move.w	#$E680-$21,d3
 		bsr.w	LevSelSndTest	; refresh text
 		move.w	d6,($FFFFFF82).w
-
+		bra.w	LevelSelect
 ; ---------------------------------------------------------------------------
 ; Level	Select
 ; ---------------------------------------------------------------------------
-
+YouAreAnIdiot:
+		bsr.w	ClearScreen
+		
+		lea	($C00004).l,a6
+		move.w	#$8700,(a6) ; first colour is bg now
+		
+		move.l	#$40000000,($C00004).l
+		lea	(Nem_Idiot).l,a0 ;	load idiot sprites
+		bsr.w	NemDec
+		lea	($FF0000).l,a1
+		lea	(Eni_Idiot).l,a0 ; load mappings for IDIOT
+		move.w	#0,d0
+		bsr.w	EniDec
+		lea	($FF0000).l,a1
+		move.l	#$43040003,d0
+		moveq	#35,d1
+		moveq	#13,d2
+		bsr.w	ShowVDPGraphics
+		moveq	#20,d0
+		bsr.w	PalLoad2	; load Sega logo pallet
+		
+		move.w	#$E5,d0		; YOU ARE AN IDIOT BOOM
+		bsr.w	PlaySound_Special
+	@wait:
+		move.b	#4,($FFFFF62A).w
+		bsr.w	DelayProgram
+		bra.s	@wait
 LevelSelect:
 		move.b	#4,($FFFFF62A).w
 		bsr.w	DelayProgram
@@ -3376,11 +3403,8 @@ LevelSelect:
 		beq.s	LevelSelect	; if not, branch
 		move.w	($FFFFFF82).w,d0
 		cmpi.w	#$15,d0		; have you selected item $15 (free wifi)?
-		bne.s	@dontboom	; if not, dont blow this place up
-		move.w	#$E4,d0
-		bsr.w	PlaySound_Special
-		jmp		CheckSumError; BOOM
-	@dontboom:
+		beq.w	YouAreAnIdiot	; if not, dont blow this place up
+		
 		cmpi.w	#$14,d0		; have you selected item $14 (sound test)?
 		bne.s	LevSel_Level_SS	; if not, go to	Level/SS subroutine
 		
@@ -37881,6 +37905,10 @@ Eni_JapNames:	incbin	mapeni\japcreds.bin	; Japanese credits (mappings)
 		even
 Nem_JapNames:	incbin	artnem\japcreds.bin	; Japanese credits
 		even
+Eni_Idiot:	incbin	mapeni\idiot.bin	; Idiot (mappings)
+		even
+Nem_Idiot:	incbin	artnem\idiot.bin	; Idiot
+		even
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - Sonic
 ; ---------------------------------------------------------------------------
@@ -39157,14 +39185,14 @@ Sound_ChkValue:				; XREF: sub_71B4C
 		bcs.w	locret_71F8C
 		cmpi.b	#$E0,d7
 		bcs.w	Sound_D0toDF	; sound	$D0-$DF
-		cmpi.b	#$E4,d7
-		bls.s	Sound_E0toE4	; sound	$E0-$E4
+		cmpi.b	#$E5,d7
+		bls.s	Sound_E0toE5	; sound	$E0-$E5
 
 locret_71F8C:
 		rts	
 ; ===========================================================================
 
-Sound_E0toE4:				; XREF: Sound_ChkValue
+Sound_E0toE5				; XREF: Sound_ChkValue
 		subi.b	#$E0,d7
 		lsl.w	#2,d7
 		jmp	Sound_ExIndex(pc,d7.w)
@@ -39180,6 +39208,8 @@ Sound_ExIndex:
 		bra.w	Sound_E3
 ; ===========================================================================
 		bra.w	Sound_E4
+; ===========================================================================
+		bra.w	Sound_E5
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Play "Say-gaa" PCM sound
@@ -39204,6 +39234,55 @@ PlayPCM_Loop:
 return_PlayPCM: 
 		addq.w	#4,sp 
 		rts
+		
+; ---------------------------------------------------------------------------
+; Play you are an idiot pcm sound
+; ---------------------------------------------------------------------------
+
+Sound_E5:  
+		lea	(IdiotPCM).l,a2			; Load the idiot PCM sample into a2. It's important that we use a2 since a0 and a1 are going to be used up ahead when reading the joypad ports 
+		move.l	#(IdiotPCM_End-IdiotPCM),d3			; Load the size of the idiot PCM sample into d3 
+		move.b	#$2A,($A04000).l		; $A04000 = $2A -> Write to DAC channel	  
+PlayPCM_LoopE5:	  
+
+		move.b	(a2)+,($A04001).l		; Write the PCM data (contained in a2) to $A04001 (YM2612 register D0) 
+		
+		addq.w	#1,($FFFFFE24).w
+		
+		move.b	($FFFFFE24).w,d0
+		andi.b	#$F,d0
+		beq.s	SfxE5SwapPalette
+		
+		move.w	#$58-2,d0				; Write the pitch ($58 in this case) to d0  (-28 from the check before)
+		dbf	d0,*				; Decrement d0; jump to itself if not 0. (for pitch control, avoids playing the sample too fast)   (14 cycles)
+		sub.l	#1,d3				; Subtract 1 from the PCM sample size 
+		beq.s	Sound_E5			; If d3 = 0, we finished playing the PCM sample, DONT STOP
+		bra.s	PlayPCM_LoopE5
+		
+SfxE5SwapPalette:
+		
+		
+		
+		lea	($C00004).l,a5
+		move.l	#$94000000+((($10>>1)&$FF00)<<8)+$9300+(($10>>1)&$FF),(a5) ; len
+		
+		
+		btst	#4,($FFFFFE24).w
+		beq.s	@not_black
+		move.l	#$96000000+((($FFFFFB30>>1)&$FF00)<<8)+$9500+(($FFFFFB30>>1)&$FF),(a5)	; source	
+		bra.s	@merge
+	@not_black:
+		move.l	#$96000000+((($FFFFFB20>>1)&$FF00)<<8)+$9500+(($FFFFFB20>>1)&$FF),(a5)	; source
+	@merge:
+		move.w	#$9700+(((($FFFFFB20>>1)&$FF0000)>>16)&$7F),(a5) ; source
+		move.w	#$C000+(0&$3FFF),(a5) ; dest
+		move.w	#$80+((0&$C000)>>14),($FFFFF640).w ;dest
+		move.w	($FFFFF640).w,(a5)
+		
+		move.w	#$58-11,d0				; attempt at removing the little jumps
+		dbf	d0,*				; (14 cycles)
+		bra.s	PlayPCM_LoopE5
+		
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Play music track $81-$9F
@@ -41039,6 +41118,9 @@ SoundD0:	incbin	sound\soundD0.bin
 		even
 SegaPCM:	incbin	sound\segapcm.bin
 SegaPCM_end:	even
+
+IdiotPCM:	incbin	sound\youare.bin
+IdiotPCM_end:	even
 
 ; end of 'ROM'
 EndOfRom:
