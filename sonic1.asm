@@ -19490,7 +19490,7 @@ loc_F9FE:
 
 loc_FA12:
 		move.w	d4,d2
-		bsr.w	MvSonicOnPtfm
+		;bsr.w	MvSonicOnPtfm Causes an error in building (Come back to this)
 		moveq	#0,d4
 		rts	
 ; ===========================================================================
@@ -19520,7 +19520,7 @@ loc_FA44:
 
 loc_FA58:
 		move.w	d4,d2
-		bsr.w	MvSonicOnPtfm
+	;	bsr.w	MvSonicOnPtfm  Causes an error in building (Come back to this)
 		moveq	#0,d4
 		rts	
 ; ===========================================================================
