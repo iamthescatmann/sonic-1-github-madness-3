@@ -1,6 +1,7 @@
 {
-    "description": "Flex 2 Project File",
+    "Flex": 2,
     "name": "",
+    "node": "3b933959-6263-4958-b487-ca0d225026da",
     "objects": [
         {
             "format": "Sonic 1.js",
