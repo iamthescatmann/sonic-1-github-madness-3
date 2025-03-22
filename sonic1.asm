@@ -41232,7 +41232,7 @@ SoundCA:	incbin	sound\soundCA.bin
 		even
 SoundCB:	incbin	sound\soundCB.bin
 		even
-SoundCC:	incbin	sound\soundCC.bin
+SoundCC:	incbin	sound\C9.ssf
 		even
 SoundCD:	incbin	sound\soundCD.bin
 		even

@@ -59945,23 +59945,23 @@
 00098658                            		even
 00098658                            SoundCB:	incbin	sound\soundCB.bin
 000986A4                            		even
-000986A4                            SoundCC:	incbin	sound\soundCC.bin
-000986DE                            		even
-000986DE                            SoundCD:	incbin	sound\soundCD.bin
-000986EC                            		even
-000986EC                            SoundCE:	incbin	sound\soundCE.bin
-0009871A                            		even
-0009871A                            SoundCF:	incbin	sound\soundCF.bin
-00098752                            		even
-00098752                            SoundD0:	incbin	sound\soundD0.bin
-0009878C                            		even
-0009878C                            SegaPCM:	incbin	sound\segapcm.bin
-000B28E2                            SegaPCM_end:	even
-000B28E2                            
-000B28E2                            IdiotPCM:	incbin	sound\youare.bin
-000BC9B4 00                         IdiotPCM_end:	even
-000BC9B4                            
-000BC9B4                            ; end of 'ROM'
-000BC9B4                            EndOfRom:
-000BC9B4                            
-000BC9B4                            
+000986A4                            SoundCC:	incbin	sound\C9.ssf
+000986D2                            		even
+000986D2                            SoundCD:	incbin	sound\soundCD.bin
+000986E0                            		even
+000986E0                            SoundCE:	incbin	sound\soundCE.bin
+0009870E                            		even
+0009870E                            SoundCF:	incbin	sound\soundCF.bin
+00098746                            		even
+00098746                            SoundD0:	incbin	sound\soundD0.bin
+00098780                            		even
+00098780                            SegaPCM:	incbin	sound\segapcm.bin
+000B28D6                            SegaPCM_end:	even
+000B28D6                            
+000B28D6                            IdiotPCM:	incbin	sound\youare.bin
+000BC9A8 00                         IdiotPCM_end:	even
+000BC9A8                            
+000BC9A8                            ; end of 'ROM'
+000BC9A8                            EndOfRom:
+000BC9A8                            
+000BC9A8                            
