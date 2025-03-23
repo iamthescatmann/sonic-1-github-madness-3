@@ -1,6 +1,7 @@
 {
-    "description": "Flex 2 Project File",
+    "Flex": 2,
     "name": "",
+    "node": "3b933959-6263-4958-b487-ca0d225026da",
     "objects": [
         {
             "format": "Sonic 1.js",
@@ -128,7 +129,8 @@
             "palettes": [],
             "art": {
                 "path": "artnem\\monitors.bin",
-                "compression": "Nemesis"
+                "compression": "Nemesis",
+                "offset": 0
             },
             "mappings": {
                 "path": "_maps\\obj26.asm",
@@ -142,14 +144,16 @@
                 "format": "Sonic 1",
                 "customDefinition": "",
                 "label": ""
-            }
+            },
+            "uuid": "5084dacb-f1a4-496e-9d15-f129272959b2"
         },
         {
             "name": "title sonic",
             "palettes": [],
             "art": {
                 "path": "artnem\\titleson.bin",
-                "compression": "Nemesis"
+                "compression": "Nemesis",
+                "offset": 0
             },
             "mappings": {
                 "path": "_maps\\obj0E.asm",
@@ -163,7 +167,8 @@
                 "format": "Sonic 1",
                 "customDefinition": "",
                 "label": ""
-            }
+            },
+            "uuid": "84dacbf1-a489-4e5d-95f1-29272959b29e"
         }
     ]
 }
