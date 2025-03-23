@@ -1,8 +1,53 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "3b933959-6263-4958-b487-ca0d225026da",
+    "node": "221514e0-977e-4ee4-a734-ba98094ecd01",
     "objects": [
+        {
+            "uuid": "221514e0-977e-4ee4-a734-ba98094ecd01",
+            "format": "Sonic 1.js",
+            "name": "bill newton crabmeat real",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\crabmeat.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\obj1F.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
+        {
+            "uuid": "7c221514-e097-4e7e-a467-34ba98094ecd",
+            "format": "Sonic 1.js",
+            "name": "sonc",
+            "palettes": [
+                {
+                    "path": "pallet\\sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artunc\\sonic.bin",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Sonic.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": true,
+                "path": "_inc\\Sonic dynamic pattern load cues.asm",
+                "label": ""
+            }
+        },
         {
             "format": "Sonic 1.js",
             "name": "motobug",
@@ -145,7 +190,8 @@
                 "customDefinition": "",
                 "label": ""
             },
-            "uuid": "5084dacb-f1a4-496e-9d15-f129272959b2"
+            "uuid": "5084dacb-f1a4-496e-9d15-f129272959b2",
+            "format": "Sonic 1.js"
         },
         {
             "name": "title sonic",
