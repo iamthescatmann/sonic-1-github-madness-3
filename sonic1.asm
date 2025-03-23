@@ -24080,6 +24080,7 @@ Obj01_MdJump2:				; XREF: Obj01_Modes
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_ChgJumpDir
 		bsr.w	Sonic_LevelBound
+		bsr.w	Sonic_AirUnroll
 		jsr	ObjectFall
 		btst	#6,$22(a0)
 		beq.s	loc_12EA6
@@ -24522,6 +24523,27 @@ loc_13242:
 		rts	
 ; End of function Sonic_RollRight
 
+Sonic_AirUnroll:
+		
+		tst.b	$3A(a0) ; check jump height control
+		bne.s	@timer
+		move.b	($FFFFF605).w,d0
+		andi.b	#$70,d0 ; is abc being pressed?
+		beq.s	@end	; if not, branch
+		bclr	#2,$22(a0)
+		move.b	#$13,$16(a0)
+		move.b	#9,$17(a0)
+		move.b	#14,$1C(a0)	; use dunk animation
+		move.l	$10(a0),d0
+		add.l	d0,d0
+		move.l	d0,$10(a0)
+		subq.w	#5,$C(a0)
+	@end:
+		rts
+	@timer:
+		subq.b	#1,$3A(a0)
+		rts
+
 ; ---------------------------------------------------------------------------
 ; Subroutine to	change Sonic's direction while jumping
 ; ---------------------------------------------------------------------------
@@ -24783,6 +24805,7 @@ loc_1341C:
 		move.b	#2,$1C(a0)	; use "jumping"	animation
 		bset	#2,$22(a0)
 		addq.w	#5,$C(a0)
+		move.b	#10,$3A(a0) ; timer
 
 locret_1348E:
 		rts	
