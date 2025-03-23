@@ -33,9 +33,9 @@ Vectors:	dc.l $FFFE00, EntryPoint, BusError, AddressError
 		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
 		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
 Console:	dc.b 'SEGA MEGA DRIVE ' ; Hardware system ID
-Date:		dc.b '(C)IDK 2025.03  ' ; Release date
-Title_Local:	dc.b 'GITHUB MADNESS 3                                ' ; Domestic name
-Title_Int:	dc.b 'GITHUB MADNESS 3                                ' ; International name
+Date:		dc.b '(C)CADE CADE C  ' ; Release date
+Title_Local:	dc.b 'how to disassemble vhs tapes on a slab of wood  ' ; Domestic name
+Title_Int:	dc.b 'how to disassemble vhs tapes on a slab of wood  ' ; International name
 Serial:		dc.b 'GM 00001009-00'   ; Serial/version number
 Checksum:	dc.w 0
 		dc.b 'J               ' ; I/O support
