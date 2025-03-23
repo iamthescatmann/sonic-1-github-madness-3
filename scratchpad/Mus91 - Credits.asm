@@ -19,7 +19,7 @@ Mus91_Credits_Header:
 ;	coninight, 	ghz,		luka luka night fever
 ;	undecided, 	lz,		undecided
 ;	undecided, 	mz,		undecided
-;	undecided, 	slz,		undecided
+;	carlos, 	slz,		meltdown
 ;	undecided, 	sbz,		undecided
 ;	undecided, 	ccz,		undecided
 ;	undecided, 	ending,		undecided
